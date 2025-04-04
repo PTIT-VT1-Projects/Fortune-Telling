@@ -2,7 +2,7 @@
 const config = {
     // API configuration
         api: {
-            key: "AIzaSyBapSJbkMr9XQeAJq7b7DRPFZJEwZjJLg4",
+            key: import.meta.env.VITE_GEMINI_API_KEY,
             url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
         },
     
@@ -15,10 +15,10 @@ const config = {
     
         // Application settings
         appSettings: {
-            appName: import.meta.env.REACT_APP_NAME || "Face Insights AI",
-            appVersion: import.meta.env.REACT_APP_VERSION || "1.2.3",
-            companyName: import.meta.env.REACT_APP_COMPANY || "camnh",
-            copyrightYear: import.meta.env.REACT_APP_COPYRIGHT_YEAR || "2025"
+            appName: import.meta.env.VITE_APP_NAME || "Face Insights AI",
+            appVersion: import.meta.env.VITE_APP_VERSION || "1.2.3",
+            companyName: import.meta.env.VITE_APP_COMPANY || "camnh",
+            copyrightYear: import.meta.env.VITE_APP_COPYRIGHT_YEAR || "2025"
         }
 };
 
