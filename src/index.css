@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f5f8fa;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Global responsive styles */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --primary-color: #4169e1;
+    --text-color: #333333;
+    --light-gray: #f5f8fa;
+    --border-color: #edf2f7;
+}
+
+/* Mobile viewport optimization */
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* Container widths */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+}
+
+/* Prevent text selection on mobile taps */
+@media (max-width: 768px) {
+    .no-select {
+        user-select: none;
+    }
+}
+
+/* Improve scrolling on mobile */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Optimizations for S21 Ultra (6.8 inch) and similar devices */
+@media (max-width: 412px) and (min-height: 915px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    /* Adjust font sizes for high-res displays */
+    .score-value {
+        font-size: 1.75rem !important;
+    }
+
+    .feature-name,
+    .ratio-name {
+        font-size: 0.95rem !important;
+    }
+
+    .feature-description,
+    .ratio-description {
+        font-size: 0.85rem !important;
+    }
+}

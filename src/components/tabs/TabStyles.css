@@ -1,0 +1,235 @@
+/* Common tab styling */
+.tab-container {
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Face Reading Tab */
+  .facial-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .feature-row {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .feature-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #4169e1;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .feature-description {
+    margin: 0.5rem 0 0;
+    line-height: 1.5;
+    color: #333;
+    font-size: 0.95rem;
+  }
+  
+  .feature-score {
+    display: flex;
+    align-items: center;
+  }
+  
+  .score-badge {
+    background: linear-gradient(135deg, #4361ee 0%, #4895ef 100%);
+    color: white;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .score-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(67, 97, 238, 0.5);
+  }
+  
+  /* Special score badge for important features like Physiognomy */
+  .score-badge-highlight {
+    background: linear-gradient(135deg, #4361ee 0%, #4895ef 100%);
+    color: white;
+    border-radius: 10px;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.5);
+    padding: 0 10px;
+    margin-left: 8px;
+  }
+  
+  .loading-message {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+  }
+  
+  /* Anthropometry Tab */
+  .anthropometry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .ratio-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .ratio-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #4169e1;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ratio-details {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ratio-value {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .ratio-ideal {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .ratio-description {
+    margin: 0.5rem 0 0;
+    line-height: 1.5;
+    color: #333;
+    font-size: 0.95rem;
+  }
+  
+  /* Mobile Optimization */
+  @media (max-width: 768px) {
+    .tab-container {
+      padding: 0.75rem;
+    }
+  
+    .facial-features-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .feature-row,
+    .ratio-card {
+      padding: 0.75rem;
+    }
+  
+    .feature-name,
+    .ratio-name {
+      font-size: 1rem;
+    }
+  
+    .feature-description,
+    .ratio-description {
+      font-size: 0.9rem;
+    }
+  
+    .score-badge {
+      width: 1.8rem;
+      height: 1.8rem;
+      font-size: 0.9rem;
+    }
+  
+    .anthropometry-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Additional optimization for smaller phones */
+  @media (max-width: 380px) {
+    .tab-container {
+      padding: 0.5rem;
+    }
+  
+    .feature-row,
+    .ratio-card {
+      padding: 0.75rem 0.5rem;
+    }
+  
+    .feature-name,
+    .ratio-name {
+      font-size: 0.95rem;
+    }
+  
+    .feature-description,
+    .ratio-description {
+      font-size: 0.85rem;
+    }
+  
+    .score-badge {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+  
+  /* Style for overall-evaluation section */
+  .overall-section {
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 12px;
+  }
+  
+  .overall-section:last-child {
+    border-bottom: none;
+  }
+  
+  .overall-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .overall-section p {
+    color: #555;
+    line-height: 1.5;
+    margin-top: 0;
+  }
+  
+  @media (max-width: 480px) {
+    .overall-section h3 {
+      font-size: 1rem;
+    }
+  
+    .overall-section p {
+      font-size: 0.9rem;
+    }
+  }
