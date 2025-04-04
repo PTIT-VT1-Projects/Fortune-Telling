@@ -11,12 +11,10 @@
   .hero-section {
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(58, 12, 163, 0.03));
     border-radius: 0 0 40px 40px;
     position: relative;
     overflow: hidden;
     margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
   }
   
   .hero-section::before {
@@ -140,7 +138,6 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .upload-area {
