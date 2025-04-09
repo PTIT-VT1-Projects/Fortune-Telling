@@ -40,7 +40,7 @@
     font-weight: 800;
     color: var(--dark-text);
     margin-bottom: 20px;
-    background: var(--gradient-bg);
+    background: red;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -63,7 +63,7 @@
   .hero-decoration {
     width: 100px;
     height: 4px;
-    background: var(--gradient-bg);
+    background: red;
     margin: 30px auto 0;
     border-radius: 4px;
     position: relative;
@@ -76,7 +76,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--primary-color);
+    background: red;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -166,7 +166,6 @@
     right: 0;
     bottom: 0;
     border-radius: 24px;
-    background: radial-gradient(circle at 50% 50%, rgba(67, 97, 238, 0.05), transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
   }
@@ -191,7 +190,7 @@
   
   .upload-icon {
     margin-bottom: 24px;
-    color: var(--primary-color);
+    color: red;
     opacity: 0.9;
     transition: all 0.4s ease;
     filter: drop-shadow(0 4px 8px rgba(67, 97, 238, 0.3));

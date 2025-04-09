@@ -156,7 +156,7 @@
   
   .user-simple-info {
     font-weight: 700;
-    color: #0066cc;
+    color: red;
     font-size: 1.25rem;
   }
   
@@ -189,7 +189,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: linear-gradient(145deg, #0078d7, #0091ff);
+    background: red;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -197,14 +197,13 @@
     font-size: 3rem;
     font-weight: bold;
     margin: 0 auto 10px;
-    box-shadow: 0 8px 25px rgba(0, 120, 215, 0.4);
     position: relative;
     overflow: hidden;
   }
   
   .score-label {
     text-align: center;
-    color: #0066cc;
+    color: red;
     font-weight: 600;
     font-size: 1.1rem;
     margin-top: 5px;
@@ -237,7 +236,7 @@
   .score-rating {
     text-align: center;
     font-size: 1.8rem;
-    color: #0066cc;
+    color: red;
     font-weight: 700;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
@@ -248,7 +247,7 @@
     width: 100%;
     padding: 16px;
     margin: 0 auto 20px;
-    background: linear-gradient(145deg, #0078d7, #0068be);
+    background: red;
     color: white;
     border: none;
     border-radius: 12px;
@@ -531,7 +530,7 @@
   .loading-logo-placeholder {
     width: 24px;
     height: 24px;
-    background: linear-gradient(145deg, #0078d7, #0091ff);
+    background: red;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;

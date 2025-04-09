@@ -69,7 +69,7 @@ function FaceReadingTab({ faceData, isLoading }) {
             <div className="feature-name">
               {feature.name}
               <div className="feature-score">
-                <div className="score-badge">{feature.score !== null ? feature.score : ''}</div>
+                <div className="score-badge-highlight">{feature.score !== null ? feature.score : ''}</div>
               </div>
             </div>
             <p className="feature-description">{feature.description}</p>

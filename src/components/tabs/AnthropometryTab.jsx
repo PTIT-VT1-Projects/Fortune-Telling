@@ -38,7 +38,7 @@ function AnthropometryTab({ faceData, isLoading }) {
             <div className="feature-name">
               {feature.title}
               <div className="feature-score">
-                <div className="score-badge">{feature.score || ''}</div>
+                <div className="score-badge-highlight">{feature.score || ''}</div>
               </div>
             </div>
             <p className="feature-description">{feature.description}</p>

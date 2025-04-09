@@ -193,7 +193,6 @@
   /* Text styles */
   .feature-text {
     padding: 1rem 1.2rem;
-    background: linear-gradient(to bottom, #f9f9ff, #fff);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -204,7 +203,7 @@
   .feature-title {
     font-size: 1.5rem;
     margin-bottom: 0.8rem;
-    color: var(--primary-color, #3a86ff);
+    color: red;
     text-align: center;
     text-transform: uppercase;
     font-weight: 700;

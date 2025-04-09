@@ -26,7 +26,7 @@
   .feature-name {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #4169e1;
+    color: red;
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
@@ -46,11 +46,11 @@
   }
   
   .score-badge {
-    background: linear-gradient(135deg, #4361ee 0%, #4895ef 100%);
+    background: red;
     color: white;
-    border-radius: 50%;
-    width: 2.2rem;
-    height: 2.2rem;
+    border-radius: 10px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,7 +67,7 @@
   
   /* Special score badge for important features like Physiognomy */
   .score-badge-highlight {
-    background: linear-gradient(135deg, #4361ee 0%, #4895ef 100%);
+    background: red;
     color: white;
     border-radius: 10px;
     min-width: 2.5rem;
@@ -106,7 +106,7 @@
   .ratio-name {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #4169e1;
+    color: red;
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
