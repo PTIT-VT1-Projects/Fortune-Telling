@@ -31,7 +31,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom, #f7f9fc, #e6eaf4);
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -140,7 +139,7 @@ html {
   margin: 0 auto;
   width: 100%;
   position: relative;
-  background-color: white;
+  background-color: transparent;
 }
 
 .main-content {
@@ -818,6 +817,21 @@ html {
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
+}
+
+.take-camera {
+  background: #fe0d0b;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  z-index: 100000;
 }
 
 .retry-button:hover {

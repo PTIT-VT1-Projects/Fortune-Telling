@@ -62,7 +62,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
+      <div className="app" id="app">
         <Header onResetApp={() => handleReset(null)} />
         <main className="main-content">
           <Routes>

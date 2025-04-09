@@ -170,17 +170,6 @@
     transition: opacity 0.4s ease;
   }
   
-  .upload-area:hover::before {
-    opacity: 1;
-  }
-  
-  .upload-area:hover {
-    border-color: var(--primary-color);
-    background-color: rgba(67, 97, 238, 0.03);
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-  }
-  
   .drag-active {
     border-color: var(--primary-color);
     background-color: rgba(67, 97, 238, 0.04);

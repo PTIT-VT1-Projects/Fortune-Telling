@@ -63,7 +63,7 @@ function OverallEvaluationTab({ faceData, isLoading }) {
                         <div className="feature-name">
                             {feature.name}
                             <div className="feature-score">
-                                <div className="score-badge">
+                                <div className="score-badge-highlight">
                                     {feature.score !== null ? feature.score : '0'}
                                 </div>
                             </div>

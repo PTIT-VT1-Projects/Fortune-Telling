@@ -100,6 +100,7 @@ class ImageService {
         try {
         URL.revokeObjectURL(url);
         } catch (error) {
+            return error;
         }
     }
     }
@@ -110,16 +111,16 @@ class ImageService {
      * @returns {Promise<HTMLImageElement>} - The loaded image element
      */
     static preloadImage(src) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-        resolve(img);
-        };
-        img.onerror = (error) => {
-        reject(new Error('Không thể tải hình ảnh'));
-        };
-        img.src = src;
-    });
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+            resolve(img);
+            };
+            img.onerror = (error) => {
+                reject(new Error('Không thể tải hình ảnh'));
+            };
+            img.src = src;
+        });
     }
 
     /**
@@ -263,6 +264,7 @@ class ImageService {
      * @returns {Promise<string>} - Base64 encoded scaled image
      */
     static async prepareImageForAnalysis(file) {
+    // eslint-disable-next-line no-useless-catch
     try {
         // Scale the image
         const scaledBlob = await this.scaleImageForAnalysis(file);
@@ -283,7 +285,7 @@ class ImageService {
 
             resolve(base64String);
             } catch (error) {
-            reject(new Error('Không thể xử lý dữ liệu hình ảnh'));
+                reject(new Error('Không thể xử lý dữ liệu hình ảnh'));
             }
         };
 
@@ -339,19 +341,36 @@ class ImageService {
 
     // Analysis function
     static async analyzePortrait(file) {
-    // 1. Validate the image
-    const validationResult = await this.validateImage(file);
-    if (!validationResult.isValid) {
-        throw new Error(validationResult.error);
+        // 1. Validate the image
+        const validationResult = await this.validateImage(file);
+        if (!validationResult.isValid) {
+            throw new Error(validationResult.error);
+        }
+
+        // 2. Convert to base64 for analysis
+        const base64Image = await AiService.fileToBase64(file);
+
+        // 3. Perform the analysis
+        const analysisResult = await AiService.analyzeFace(base64Image, file.type);
+
+        return analysisResult;
     }
 
-    // 2. Convert to base64 for analysis
-    const base64Image = await AiService.fileToBase64(file);
+    /**
+     * Base64 to file
+     * @param {*} base64 
+     * @returns 
+     */
+    static base64ToImageFile(base64) {
+        const byteString = atob(base64.split(',')[1]); // Bỏ phần "data:image/png;base64,"
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
 
-    // 3. Perform the analysis
-    const analysisResult = await AiService.analyzeFace(base64Image, file.type);
-
-    return analysisResult;
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        const filename = Date.now()
+        return new File([ab], filename, { type: 'image/png' });
     }
 }
 
