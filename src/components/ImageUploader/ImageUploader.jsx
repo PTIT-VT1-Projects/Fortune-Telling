@@ -117,8 +117,8 @@ const ImageUploader = ({ onImageSelect }) => {
                 }
                 </div>
             {/* Manual upload */}
-            {useCamera && <p className='cursor-pointer' onClick={() => setUseCamera(false)}>Không quay được camera? Ấn vào đây để tải ảnh lên</p>}
-            {!useCamera && <p className='cursor-pointer' onClick={() => setUseCamera(true)}>Quay lại trang quét camera</p>}
+            {useCamera && <p style={{cursor: 'pointer'}} onClick={() => setUseCamera(false)}>Không quay được camera? Ấn vào đây để tải ảnh lên</p>}
+            {!useCamera && <p style={{cursor: 'pointer'}} onClick={() => setUseCamera(true)}>Quay lại trang quét camera</p>}
         </div>
     </div>
     );

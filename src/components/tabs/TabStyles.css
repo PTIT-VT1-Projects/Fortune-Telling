@@ -25,7 +25,7 @@
   
   .feature-name {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: red;
     margin-bottom: 0.5rem;
     display: flex;
@@ -37,7 +37,7 @@
     margin: 0.5rem 0 0;
     line-height: 1.5;
     color: #333;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
   
   .feature-score {
