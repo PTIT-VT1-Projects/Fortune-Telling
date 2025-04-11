@@ -13,8 +13,8 @@ const RadarChart = ({width, height, overallEvaluation, overallEvaluationScores})
         chart: {
             polar: true,
             type: "line",
-            width: width || 550,
-            height: height || 550
+            width: width || null,
+            height: height || null
         },
         title: {
             text: ""

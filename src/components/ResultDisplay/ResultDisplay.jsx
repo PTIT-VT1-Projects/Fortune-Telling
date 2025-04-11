@@ -421,7 +421,7 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
     return (
         <div className="row">
             {/* Profile Section */}
-            <div className="col-md-2">
+            <div className="col-md-3">
                 <div className='profile-section'>
                     <div className="profile-section-inner">
                         <div className="profile-image-container">
@@ -449,13 +449,12 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
                             {faceData?.faceScoreRating || scoreRating}
                             </div>
                         </div>
-
-                        </div>
                     </div>
                 </div>
+            </div>
 
             {/* Results Column */}
-            <div className="col-md-10">
+            <div className="col-md-9">
                 {/* Tab Content */}
                 <div className="tab-content">
                     {renderTabContent(image)}

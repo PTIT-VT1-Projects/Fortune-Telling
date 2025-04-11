@@ -47,7 +47,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
                     <div>
                         <button className='take-camera' onClick={print}> In</button>
                     </div>
-                    <div>
+                    <div className='align-items-center'>
                         <RadarChart overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
                     </div>
                 </div>
