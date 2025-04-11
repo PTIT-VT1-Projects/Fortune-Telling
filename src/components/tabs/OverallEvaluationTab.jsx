@@ -1,51 +1,112 @@
 import './TabStyles.css';
 
+import {
+    Chart as ChartJS,
+    Filler,
+    Legend,
+    LineElement,
+    PointElement,
+    RadialLinearScale,
+    Tooltip,
+} from 'chart.js';
+
+import {Radar} from 'react-chartjs-2'
 import React from 'react';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+ChartJS.register(
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend,
+    annotationPlugin
+);
+
+const features = [
+    { featureKey: 'appearance', label: 'Ngoại hình' },
+    { featureKey: 'personality', label: 'Tính cách' },
+    { featureKey: 'lifestyle', label: 'Lối sống' },
+    { featureKey: 'interests', label: 'Sở thích' },
+    { featureKey: 'strengths', label: 'Điểm mạnh' },
+    { featureKey: 'weaknesses', label: 'Điểm yếu' },
+];
+
+
+const options = {
+    responsive: true,
+    maintainAspectRatio: false, // Cho phép chiều cao co giãn
+    scales: {
+        r: {
+            min: 0,
+            max: 10,
+            ticks: {
+                stepSize: 1
+            },
+            pointLabels: {
+                font: {
+                    size: 11
+                }
+            }
+        }
+    }
+};
+
+// Function to get feature description and score
+const getFeatureDetails = (overallEvaluation, overallEvaluationScores) => {
+    let descriptions = [];
+    let scores = [];
+    features.map(feature => {
+        const featureKey = feature.featureKey
+        // Try to get description from overallEvaluation data
+        if (overallEvaluation && overallEvaluation[featureKey]) {
+            let description = overallEvaluation[featureKey];
+            descriptions.push(description)
+        }
+
+        // Try to get score from overallEvaluationScores
+        if (overallEvaluationScores && overallEvaluationScores[featureKey] !== undefined) {
+            let score = overallEvaluationScores[featureKey];
+            scores.push(score)
+        }
+    })
+
+    return {
+        descriptions,
+        scores
+    }
+};
+
+export const data = (overallEvaluation, overallEvaluationScores) => {
+    return {
+        labels: features.map(item => item.label),
+        datasets: [
+            {
+                label: 'Điểm số',
+                data: getFeatureDetails(overallEvaluation, overallEvaluationScores).scores,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            },
+        ],
+    }
+};
+
 
 function OverallEvaluationTab({ faceData, isLoading }) {
     // Check if we have face data
     const { overallEvaluation, overallEvaluationScores } = faceData || {};
 
-    // Function to get feature description and score
-    const getFeatureDetails = (featureKey, title) => {
-        let description = '';
-        let score = null;
-
-        // Try to get description from overallEvaluation data
-        if (overallEvaluation && overallEvaluation[featureKey]) {
-            description = overallEvaluation[featureKey];
-        }
-
-        // Try to get score from overallEvaluationScores
-        if (overallEvaluationScores && overallEvaluationScores[featureKey] !== undefined) {
-            score = overallEvaluationScores[featureKey];
-        }
-
-        return {
-            name: title,
-            description: description,
-            score: typeof score === 'number' ? Math.round(score) : null
-        };
-    };
-
-    // Features for display
-    const features = [
-        getFeatureDetails('appearance', "Ngoại hình"),
-        getFeatureDetails('personality', "Tính cách"),
-        getFeatureDetails('lifestyle', "Phong cách sống"),
-        getFeatureDetails('interests', "Sở thích"),
-        getFeatureDetails('strengths', "Điểm mạnh"),
-        getFeatureDetails('weaknesses', "Điểm yếu")
-    ];
-
+    
+    
     if (isLoading) {
         return <div className="loading-message">Đang tải dữ liệu ...</div>;
     }
 
     // Check if we have any data in the overall evaluation section
-    const hasData = features.some(feature => feature.description || feature.score);
 
-    if (!hasData) {
+    if (!getFeatureDetails(overallEvaluation, overallEvaluationScores)) {
         return (
             <div className="tab-container">
                 <div className="loading-message">
@@ -56,20 +117,24 @@ function OverallEvaluationTab({ faceData, isLoading }) {
     }
 
     return (
-        <div className="tab-container">
-            <div className="facial-features-grid">
+        <div className='row'>
+            <div className='col-xl-6 col-12'>
+                <Radar data={data(overallEvaluation, overallEvaluationScores)} options={options}/>
+            </div>
+            <div className='col-xl-6 col-12'>
                 {features.map((feature, index) => (
                     <div key={index} className="feature-row">
                         <div className="feature-name">
-                            {feature.name}
+                            {feature.label}
                             <div className="feature-score">
                                 <div className="score-badge-highlight">
-                                    {feature.score !== null ? feature.score : '0'}
+                                    {getFeatureDetails(overallEvaluation, overallEvaluationScores).scores[index] !== null ? 
+                                    getFeatureDetails(overallEvaluation, overallEvaluationScores).scores[index] : '0'}
                                 </div>
                             </div>
                         </div>
                         <p className="feature-description">
-                            {feature.description || `Không có dữ liệu về ${feature.name.toLowerCase()}.`}
+                            {getFeatureDetails(overallEvaluation, overallEvaluationScores).descriptions[index] || `Không có dữ liệu về ${feature.name.toLowerCase()}.`}
                         </p>
                     </div>
                 ))}

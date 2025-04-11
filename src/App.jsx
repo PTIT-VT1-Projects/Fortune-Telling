@@ -65,30 +65,32 @@ function App() {
       <div className="app" id="app">
         <Header onResetApp={() => handleReset(null)} />
         <main className="main-content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                !previewUrl ? (
-                  <ImageUploader onImageSelect={handleImageSelect} />
-                ) : showResult ? (
-                  <ResultDisplay
-                    image={previewUrl}
-                    faceData={analysisResult}
-                    onUploadNew={handleImageSelect}
-                  />
-                ) : (
-                  <AnalysisProgress
-                    file={selectedFile}
-                    image={previewUrl}
-                    onRetry={handleReset}
-                    onAnalysisComplete={handleAnalysisComplete}
-                  />
-                )
-              }
-            />
-            <Route path="/features" element={<Features />} />
-          </Routes>
+          <div className='container'>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  !previewUrl ? (
+                    <ImageUploader onImageSelect={handleImageSelect} />
+                  ) : showResult ? (
+                    <ResultDisplay
+                      image={previewUrl}
+                      faceData={analysisResult}
+                      onUploadNew={handleImageSelect}
+                    />
+                  ) : (
+                    <AnalysisProgress
+                      file={selectedFile}
+                      image={previewUrl}
+                      onRetry={handleReset}
+                      onAnalysisComplete={handleAnalysisComplete}
+                    />
+                  )
+                }
+              />
+              <Route path="/features" element={<Features />} />
+            </Routes>
+          </div>
         </main>
       </div>
     </Router>

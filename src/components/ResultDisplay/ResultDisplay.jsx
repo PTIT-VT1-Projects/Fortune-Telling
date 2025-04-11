@@ -3,14 +3,10 @@ import './ResultDisplay.css';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import AnalysisProgress from '../AnalysisProgress/AnalysisProgress';
-import AnthropometryTab from '../tabs/AnthropometryTab';
-import FaceReadingTab from '../tabs/FaceReadingTab';
 import ImageService from '../../services/imageService';
 import OverallEvaluationTab from '../tabs/OverallEvaluationTab';
-import PhysiognomyTab from '../tabs/PhysiognomyTab';
 
 const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
-    const [activeTab, setActiveTab] = useState('overallEvaluation');
     const [averageScore, setAverageScore] = useState(0);
     const [scoreRating, setScoreRating] = useState('');
     const [error, setError] = useState(null);
@@ -339,19 +335,7 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
         );
         }
 
-        // Render the appropriate tab based on activeTab
-        switch (activeTab) {
-        case 'overallEvaluation':
-            return <OverallEvaluationTab faceData={faceData} isLoading={loading} />;
-        case 'physiognomy':
-            return <PhysiognomyTab faceData={faceData} isLoading={loading} />;
-        case 'anthropometry':
-            return <AnthropometryTab faceData={faceData} isLoading={loading} />;
-        case 'faceReading':
-            return <FaceReadingTab faceData={faceData} isLoading={loading} />;
-        default:
-            return <OverallEvaluationTab faceData={faceData} isLoading={loading} />;
-        }
+        return <OverallEvaluationTab faceData={faceData} isLoading={loading} />;
     } catch (error) {
         console.error("Error rendering tab content:", error);
         return (
@@ -371,30 +355,30 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
     if (error && error.includes('INVALID_PORTRAIT')) {
     return (
         <div className="result-display">
-        <div className="invalid-image-message">
-            <div className="invalid-image-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
+            <div className="invalid-image-message">
+                <div className="invalid-image-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                </div>
+                <h2 className="invalid-image-title">Ảnh không hợp lệ</h2>
+                <p className="invalid-image-text">
+                {error.replace('INVALID_PORTRAIT', '').trim() || 'Đây không phải là ảnh chân dung hợp lệ. Vui lòng upload ảnh khác.'}
+                </p>
+                <button className="analyze-again-button" onClick={handleUploadClick}>
+                Upload ảnh mới
+                </button>
+                <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="image/*"
+                className="file-input"
+                style={{ display: 'none' }}
+                />
             </div>
-            <h2 className="invalid-image-title">Ảnh không hợp lệ</h2>
-            <p className="invalid-image-text">
-            {error.replace('INVALID_PORTRAIT', '').trim() || 'Đây không phải là ảnh chân dung hợp lệ. Vui lòng upload ảnh khác.'}
-            </p>
-            <button className="analyze-again-button" onClick={handleUploadClick}>
-            Upload ảnh mới
-            </button>
-            <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            accept="image/*"
-            className="file-input"
-            style={{ display: 'none' }}
-            />
-        </div>
         </div>
     );
     }
@@ -403,123 +387,81 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
     if (error) {
     return (
         <div className="result-display">
-        <div className="invalid-image-message">
-            <div className="invalid-image-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-            </div>
-            <h2 className="invalid-image-title">Ảnh không hợp lệ</h2>
-            <p className="invalid-image-text">
-            {error.includes('INVALID_PORTRAIT')
-                ? error.replace('INVALID_PORTRAIT', '').trim() || 'Đây không phải là ảnh chân dung hợp lệ. Vui lòng tải lên ảnh khác.'
-                : error || 'Có lỗi xảy ra khi xử lý ảnh. Vui lòng thử lại với ảnh khác.'}
-            </p>
-            <button className="analyze-again-button" onClick={handleUploadClick}>
-            Tải lên ảnh mới
-            </button>
-            <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            accept="image/*"
-            className="file-input"
-            style={{ display: 'none' }}
-            />
-        </div>
-        </div>
-    );
-    }
-
-    // Render analysis results
-    return (
-    <div className="result-display">
-        <div className="result-container">
-        {/* Profile Section */}
-        <div className="profile-section">
-            <div className="profile-section-inner">
-            <div className="profile-image-container">
-                <img src={image} alt="Uploaded face" className="profile-image" />
-            </div>
-
-            <div className="basic-info">
-                <div className="user-simple-info">
-                {faceData?.basicInfo?.age} tuổi
+            <div className="invalid-image-message">
+                <div className="invalid-image-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
                 </div>
-            </div>
-
-            <div className="score-section">
-                <div className="score-circle">
-                <span className="score-value">
-                    {faceData?.faceScore
-                    ? Math.round(faceData.faceScore)
-                    : Math.round(averageScore)}
-                </span>
-                </div>
-            </div>
-
-            <div className="rating-section">
-                <div className="score-rating">
-                {faceData?.faceScoreRating || scoreRating}
-                </div>
-            </div>
-
-            <button className="analyze-again-button" onClick={handleUploadClick}>
-                Chọn ảnh khác
-            </button>
-            <input
+                <h2 className="invalid-image-title">Ảnh không hợp lệ</h2>
+                <p className="invalid-image-text">
+                {error.includes('INVALID_PORTRAIT')
+                    ? error.replace('INVALID_PORTRAIT', '').trim() || 'Đây không phải là ảnh chân dung hợp lệ. Vui lòng tải lên ảnh khác.'
+                    : error || 'Có lỗi xảy ra khi xử lý ảnh. Vui lòng thử lại với ảnh khác.'}
+                </p>
+                <button className="analyze-again-button" onClick={handleUploadClick}>
+                Tải lên ảnh mới
+                </button>
+                <input
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
                 accept="image/*"
                 className="file-input"
                 style={{ display: 'none' }}
-            />
+                />
             </div>
         </div>
+    );
+    }
 
-        {/* Results Column */}
-        <div className="results-column">
-            {/* Tabs Navigation */}
-            <div className="result-area">
-            <div className="tabs-container">
-                <div className="tab-buttons">
-                <button
-                    className={`tab-button ${activeTab === 'overallEvaluation' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('overallEvaluation')}
-                >
-                    Tổng quan
-                </button>
-                <button
-                    className={`tab-button ${activeTab === 'physiognomy' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('physiognomy')}
-                >
-                    Tướng số
-                </button>
-                <button
-                    className={`tab-button ${activeTab === 'anthropometry' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('anthropometry')}
-                >
-                    Nhân trắc
-                </button>
-                <button
-                    className={`tab-button ${activeTab === 'faceReading' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('faceReading')}
-                >
-                    Nhân tướng
-                </button>
+    // Render analysis results
+    return (
+        <div className="row">
+            {/* Profile Section */}
+            <div className="col-md-3">
+                <div className='profile-section'>
+                    <div className="profile-section-inner">
+                        <div className="profile-image-container">
+                            <img src={image} alt="Uploaded face" className="profile-image" />
+                        </div>
+
+                        <div className="basic-info">
+                            <div className="user-simple-info">
+                            {faceData?.basicInfo?.age} tuổi
+                            </div>
+                        </div>
+
+                        <div className="score-section">
+                            <div className="score-circle">
+                            <span className="score-value">
+                                {faceData?.faceScore
+                                ? Math.round(faceData.faceScore)
+                                : Math.round(averageScore)}
+                            </span>
+                            </div>
+                        </div>
+
+                        <div className="rating-section">
+                            <div className="score-rating">
+                            {faceData?.faceScoreRating || scoreRating}
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            {/* Results Column */}
+            <div className="col-md-9">
+                {/* Tab Content */}
+                <div className="tab-content">
+                    {renderTabContent()}
                 </div>
             </div>
-            {/* Tab Content */}
-            <div className="tab-content">
-                {renderTabContent()}
-            </div>
-            </div>
         </div>
-        </div>
-    </div>
     );
 };
 
