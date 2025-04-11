@@ -39,7 +39,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
     return (
         <div className='row'>
             {/* Print area */}
-            <div style={{display: 'none'}}>
+            <div className='d-none'>
                 <PrintArea ref={printRef} image={image} overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
             </div>
             <div className='col-xl-6 col-12'>
