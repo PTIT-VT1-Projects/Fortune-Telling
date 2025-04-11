@@ -301,54 +301,54 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
     };
 
     // Render tab content based on active tab
-    const renderTabContent = () => {
-    // Kiểm tra kỹ lưỡng faceData trước khi render
-    if (!faceData) {
-        return (
-        <div className="loading-message">
-            Không có dữ liệu phân tích, vui lòng thử lại
-        </div>
-        );
-    }
-
-    // Kiểm tra nếu faceData là object rỗng
-    if (Object.keys(faceData).length === 0) {
-        return (
-        <div className="loading-message">
-            Không có dữ liệu phân tích, vui lòng thử lại
-        </div>
-        );
-    }
-
-    try {
-        // Kiểm tra các thuộc tính quan trọng có tồn tại không
-        const hasBasicData = faceData.basicInfo && typeof faceData.basicInfo === 'object';
-        const hasFaceScore = typeof faceData.faceScore === 'number' ||
-                            (faceData.faceReadingScores && Object.keys(faceData.faceReadingScores).length > 0) ||
-                            (faceData.anthropometryScores && Object.keys(faceData.anthropometryScores).length > 0);
-
-        if (!hasBasicData || !hasFaceScore) {
-        return (
+    const renderTabContent = (image) => {
+        // Kiểm tra kỹ lưỡng faceData trước khi render
+        if (!faceData) {
+            return (
             <div className="loading-message">
-            Dữ liệu không đầy đủ, vui lòng thử lại với ảnh khác
+                Không có dữ liệu phân tích, vui lòng thử lại
             </div>
-        );
+            );
         }
 
-        return <OverallEvaluationTab faceData={faceData} isLoading={loading} />;
-    } catch (error) {
-        console.error("Error rendering tab content:", error);
-        return (
-        <div className="loading-message">
-            Có lỗi xảy ra khi hiển thị dữ liệu, vui lòng thử lại
-        </div>
-        );
-    }
+        // Kiểm tra nếu faceData là object rỗng
+        if (Object.keys(faceData).length === 0) {
+            return (
+            <div className="loading-message">
+                Không có dữ liệu phân tích, vui lòng thử lại
+            </div>
+            );
+        }
+
+        try {
+            // Kiểm tra các thuộc tính quan trọng có tồn tại không
+            const hasBasicData = faceData.basicInfo && typeof faceData.basicInfo === 'object';
+            const hasFaceScore = typeof faceData.faceScore === 'number' ||
+                                (faceData.faceReadingScores && Object.keys(faceData.faceReadingScores).length > 0) ||
+                                (faceData.anthropometryScores && Object.keys(faceData.anthropometryScores).length > 0);
+
+            if (!hasBasicData || !hasFaceScore) {
+            return (
+                <div className="loading-message">
+                    Dữ liệu không đầy đủ, vui lòng thử lại với ảnh khác
+                </div>
+            );
+            }
+
+            return <OverallEvaluationTab faceData={faceData} isLoading={loading} image={image}/>;
+        } catch (error) {
+            console.error("Error rendering tab content:", error);
+            return (
+            <div className="loading-message">
+                Có lỗi xảy ra khi hiển thị dữ liệu, vui lòng thử lại
+            </div>
+            );
+        }
     };
 
     // Render loading state with our new AnalysisInProgress component
     if (loading) {
-    return <AnalysisProgress image={image} />;
+        return <AnalysisProgress image={image} />;
     }
 
     // Render invalid image message if error code is INVALID_PORTRAIT
@@ -421,7 +421,7 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
     return (
         <div className="row">
             {/* Profile Section */}
-            <div className="col-md-3">
+            <div className="col-md-2">
                 <div className='profile-section'>
                     <div className="profile-section-inner">
                         <div className="profile-image-container">
@@ -455,10 +455,10 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
                 </div>
 
             {/* Results Column */}
-            <div className="col-md-9">
+            <div className="col-md-10">
                 {/* Tab Content */}
                 <div className="tab-content">
-                    {renderTabContent()}
+                    {renderTabContent(image)}
                 </div>
             </div>
         </div>
