@@ -8,14 +8,16 @@ import React from "react";
 
 // Initialize highcharts-more to enable polar/radar
 
-const RadarChart = ({overallEvaluation, overallEvaluationScores}) => {
+const RadarChart = ({width, height, overallEvaluation, overallEvaluationScores}) => {
     const options = {
         chart: {
             polar: true,
             type: "line",
+            width: width || 550,
+            height: height || 550
         },
         title: {
-            text: "Radar Chart with Lines",
+            text: ""
         },
         pane: {
             size: "80%",
@@ -30,6 +32,7 @@ const RadarChart = ({overallEvaluation, overallEvaluationScores}) => {
             lineWidth: 0,
             min: 0,
             max: 10,
+            tickInterval: 1, // Steps from 1 → 10
         },
         tooltip: {
             shared: true,
@@ -43,6 +46,9 @@ const RadarChart = ({overallEvaluation, overallEvaluationScores}) => {
                 pointPlacement: "on",
             },
         ],
+        credits: {
+            enabled: false  // ✅ This hides the Highcharts logo
+        },
         };
 
     return <HighchartsReact highcharts={Highcharts} options={options} />;

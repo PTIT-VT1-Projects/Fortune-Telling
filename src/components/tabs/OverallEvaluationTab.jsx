@@ -45,9 +45,11 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
             <div className='col-xl-6 col-12'>
                 <div className='mb-3 d-flex justify-content-center flex-column'>
                     <div>
-                        <button className='take-camera' onClick={print}>Print this area</button>
+                        <button className='take-camera' onClick={print}> In</button>
                     </div>
-                    <RadarChart overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
+                    <div>
+                        <RadarChart overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
+                    </div>
                 </div>
             </div>
             <div className='col-xl-6 col-12'>
