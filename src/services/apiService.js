@@ -27,12 +27,12 @@ class ApiService {
           },
 
           "overallEvaluation": {
-            "appearance": "Phân tích chi tiết về ngoại hình tổng thể của người này, bao gồm đặc điểm khuôn mặt, vẻ đẹp tổng thể, và ấn tượng đầu tiên mà họ tạo ra cho người khác. Đánh giá về sự hài hòa và cân đối, những nét độc đáo và đặc biệt trong ngoại hình. Viết ngắn trong 2 dòng",
-            "personality": "Phân tích chi tiết về tính cách dựa trên nhân tướng học Việt Nam, bao gồm đặc điểm tâm lý, cách ứng xử và giải quyết vấn đề. Phân tích người này có tính cách thế nào, có phù hợp với vị trí lãnh đạo không. Viết ngắn trong 2 dòng",
-            "strengths": "Liệt kê và phân tích chi tiết những điểm mạnh nổi bật trong tính cách và khả năng của người này, dựa trên các đặc điểm khuôn mặt. Giải thích cách những điểm mạnh này có thể giúp họ thành công trong công việc và cuộc sống. Viết ngắn trong 2 dòng",
-            "weaknesses": "Liệt kê và phân tích chi tiết những điểm yếu hoặc thách thức trong tính cách và cách cư xử của người này, dựa trên các đặc điểm khuôn mặt. Đề xuất cách họ có thể khắc phục hoặc cân bằng những điểm yếu này. Viết ngắn trong 2 dòng",
-            "interests": "Phân tích những sở thích và đam mê tiềm năng của người này dựa trên đặc điểm khuôn mặt và biểu hiện trong ảnh. Gợi ý các hoạt động, lĩnh vực nghề nghiệp hoặc sở thích có thể phù hợp với họ. Viết ngắn trong 2 dòng",
-            "lifestyle": "Phân tích phong cách sống phù hợp với đặc điểm khuôn mặt của người này, bao gồm môi trường sống, làm việc lý tưởng, cách quản lý thời gian và nguồn lực, và những thói quen có thể giúp họ phát huy tối đa tiềm năng. Viết ngắn trong 2 dòng"
+            "appearance": "Phân tích chi tiết về ngoại hình tổng thể của người này, bao gồm đặc điểm khuôn mặt, vẻ đẹp tổng thể, và ấn tượng đầu tiên mà họ tạo ra cho người khác. Đánh giá về sự hài hòa và cân đối, những nét độc đáo và đặc biệt trong ngoại hình. Viết ngắn trong 1 dòng",
+            "personality": "Phân tích chi tiết về tính cách dựa trên nhân tướng học Việt Nam, bao gồm đặc điểm tâm lý, cách ứng xử và giải quyết vấn đề. Phân tích người này có tính cách thế nào, có phù hợp với vị trí lãnh đạo không. Viết ngắn trong 1 dòng",
+            "strengths": "Liệt kê và phân tích chi tiết những điểm mạnh nổi bật trong tính cách và khả năng của người này, dựa trên các đặc điểm khuôn mặt. Giải thích cách những điểm mạnh này có thể giúp họ thành công trong công việc và cuộc sống. Viết ngắn trong 1 dòng",
+            "weaknesses": "Liệt kê và phân tích chi tiết những điểm yếu hoặc thách thức trong tính cách và cách cư xử của người này, dựa trên các đặc điểm khuôn mặt. Đề xuất cách họ có thể khắc phục hoặc cân bằng những điểm yếu này. Viết ngắn trong 1 dòng",
+            "interests": "Phân tích những sở thích và đam mê tiềm năng của người này dựa trên đặc điểm khuôn mặt và biểu hiện trong ảnh. Gợi ý các hoạt động, lĩnh vực nghề nghiệp hoặc sở thích có thể phù hợp với họ. Viết ngắn trong 1 dòng",
+            "lifestyle": "Phân tích phong cách sống phù hợp với đặc điểm khuôn mặt của người này, bao gồm môi trường sống, làm việc lý tưởng, cách quản lý thời gian và nguồn lực, và những thói quen có thể giúp họ phát huy tối đa tiềm năng. Viết ngắn trong 1 dòng"
           },
           "overallEvaluationScores": {
             "appearance": số từ 1-10 đánh giá ngoại hình tổng thể,

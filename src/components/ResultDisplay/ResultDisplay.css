@@ -54,6 +54,10 @@
     object-fit: cover;
   }
   
+  canvas[role='img'] {
+    min-height: 700px;
+  }
+
   /* Add styles for face image in profile section */
   .face-image-container {
     width: 100%;
@@ -595,8 +599,8 @@
     }
 
     canvas[role='img'] {
-      max-height: 450px;
-      max-width: 450px;
+      min-height: 400px;
+      max-width: 500px;
     }
   }
   

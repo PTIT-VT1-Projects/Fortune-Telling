@@ -9,10 +9,12 @@ import {
     RadialLinearScale,
     Tooltip,
 } from 'chart.js';
+import React, { useRef } from 'react';
 
+import PrintArea from './PrintArea';
 import {Radar} from 'react-chartjs-2'
-import React from 'react';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import { useReactToPrint } from 'react-to-print';
 
 ChartJS.register(
     RadialLinearScale,
@@ -35,7 +37,6 @@ const features = [
 
 
 const options = {
-    responsive: true,
     maintainAspectRatio: false, // Cho phép chiều cao co giãn
     scales: {
         r: {
@@ -78,7 +79,7 @@ const getFeatureDetails = (overallEvaluation, overallEvaluationScores) => {
     }
 };
 
-export const data = (overallEvaluation, overallEvaluationScores) => {
+const data = (overallEvaluation, overallEvaluationScores) => {
     return {
         labels: features.map(item => item.label),
         datasets: [
@@ -94,10 +95,17 @@ export const data = (overallEvaluation, overallEvaluationScores) => {
 };
 
 
+
 function OverallEvaluationTab({ faceData, isLoading }) {
+    const printRef = useRef();
+
     // Check if we have face data
     const { overallEvaluation, overallEvaluationScores } = faceData || {};
 
+    const print = useReactToPrint({
+            documentTitle: 'Title',
+            contentRef: printRef,
+        })
     
     
     if (isLoading) {
@@ -118,8 +126,16 @@ function OverallEvaluationTab({ faceData, isLoading }) {
 
     return (
         <div className='row'>
+            <div style={{display: 'none'}}>
+                <PrintArea ref={printRef}/>
+            </div>
             <div className='col-xl-6 col-12'>
-                <Radar data={data(overallEvaluation, overallEvaluationScores)} options={options}/>
+                <div className='mb-3 d-flex justify-content-center flex-column'>
+                    <div>
+                        <button onClick={print}>Print this area</button>
+                    </div>
+                    {/* <Radar data={data(overallEvaluation, overallEvaluationScores)} options={options}/> */}
+                </div>
             </div>
             <div className='col-xl-6 col-12'>
                 {features.map((feature, index) => (
