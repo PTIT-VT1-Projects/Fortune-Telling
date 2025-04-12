@@ -25,7 +25,56 @@ class ApiService {
             "age": số tuổi ước tính dựa trên ngoại hình khuôn mặt trong ảnh,
             "gender": "Nam" hoặc "Nữ"
           },
-
+          "anthropometryData": {
+            "faceRatio": "Phân tích chi tiết về tỷ lệ khuôn mặt dựa trên tỷ lệ vàng, độ cân đối chiều dài/chiều rộng khuôn mặt, tỷ lệ 1:1.618 và ý nghĩa khoa học của nó đối với sự hài hòa trong khuôn mặt người Việt Nam. Phân tích xem tỷ lệ này ảnh hưởng thế nào đến tính cách, sức khỏe và vận mệnh. Viết ngắn trong 8 từ",
+            "symmetryIndex": "Phân tích chi tiết về mức độ cân đối hai bên khuôn mặt, độ lệch giữa bên trái và bên phải, tính đến các đặc điểm như mắt, lông mày, mũi, miệng có đối xứng không và ý nghĩa của sự cân đối này về mặt nhân tướng học. Đưa ra nhận xét về sự hài hòa tổng thể và ảnh hưởng đến tâm lý, vận mệnh. Viết ngắn trong 8 từ",
+            "faceShape": "Phân tích chi tiết về hình dáng khuôn mặt, xem thuộc dạng nào (tròn, vuông, oval, trái xoan, trái tim, kim cương, tam giác...). Xác định khuôn mặt có cân đối theo tỷ lệ chuẩn người Việt Nam không. Phân tích ý nghĩa của hình dáng khuôn mặt đối với tính cách, vận mệnh và điểm mạnh, điểm yếu trong cuộc sống. Viết ngắn trong 8 từ",
+            "eyeDistance": "Phân tích chi tiết về khoảng cách giữa hai mắt, xem có phù hợp với tỷ lệ chuẩn theo nhân trắc học Việt Nam không (khoảng cách giữa hai mắt thường bằng chiều rộng của một mắt). Phân tích ý nghĩa của khoảng cách này về tính cách, trí tuệ, sự nhạy cảm và khả năng quan sát. Viết ngắn trong 8 từ",
+            "noseRatio": "Phân tích chi tiết về tỷ lệ của mũi so với các đặc điểm khác trên khuôn mặt trong bối cảnh người Việt Nam, bao gồm chiều dài, độ rộng, độ cao sống mũi, kích thước cánh mũi. Phân tích mũi có cao thẳng, dài, cân đối không và ý nghĩa của nó đối với tài lộc, sức khỏe, và khả năng lãnh đạo. Viết ngắn trong 8 từ",
+            "faceBoneStructure": "Phân tích chi tiết về cấu trúc xương mặt của người dùng, bao gồm xương gò má và xương hàm, xương cằm. Đánh giá sự nổi bật, cân đối và tính thẩm mỹ của các cấu trúc xương này. Phân tích ý nghĩa của cấu trúc xương mặt đối với sức khỏe, tính cách và nét hấp dẫn của khuôn mặt từ góc độ nhân trắc học. Viết ngắn trong 8 từ",
+          },
+          "anthropometryScores": {
+            "faceRatio": số từ 1-10 đánh giá tỷ lệ mặt,
+            "symmetryIndex": số từ 1-10 đánh giá sự cân đối,
+            "faceShape": số từ 1-10 đánh giá hình dáng khuôn mặt,
+            "eyeDistance": số từ 1-10 đánh giá khoảng cách mắt,
+            "noseRatio": số từ 1-10 đánh giá tỷ lệ mũi,
+            "faceBoneStructure": số từ 1-10 đánh giá cấu trúc xương mặt
+          },
+          "faceReading": {
+            "eyesAnalysis": "Phân tích chi tiết về đôi mắt theo nhân tướng học Việt Nam bao gồm kích thước, hình dạng, độ sáng, màu mắt, độ cong của đuôi mắt, khoảng cách giữa hai mắt, và ý nghĩa của nó đối với tính cách, trí tuệ, cảm xúc và vận mệnh. Phân tích đôi mắt có tốt không, có thể hiện sự chân thành, sáng suốt không. Viết ngắn trong 8 từ",
+            "noseAnalysis": "Phân tích chi tiết về mũi theo nhân tướng học Việt Nam bao gồm chiều dài, độ cao, độ rộng của sống mũi và cánh mũi, hình dạng đầu mũi, và ý nghĩa của nó đối với tài chính, sức khỏe, sự nghiệp và vận mệnh. Phân tích mũi có mang lại tài lộc, thăng tiến không. Viết ngắn trong 8 từ",
+            "mouthAnalysis": "Phân tích chi tiết về miệng và môi theo nhân tướng học Việt Nam bao gồm kích thước, hình dạng, độ dày của môi, màu sắc, đường cong của miệng khi cười, và ý nghĩa của nó đối với tính cách, khả năng giao tiếp, các mối quan hệ và vận mệnh. Phân tích miệng có khéo léo, có mang lại thành công trong giao tiếp không. Viết ngắn trong 8 từ",
+            "foreheadAnalysis": "Phân tích chi tiết về trán theo nhân tướng học Việt Nam bao gồm chiều cao, độ rộng, đường viền tóc, các đường vân trên trán, và ý nghĩa của nó đối với trí tuệ, khả năng lập kế hoạch, và cơ hội trong sự nghiệp. Phân tích trán có rộng, cao, báo hiệu sự thông minh và tài năng không. Viết ngắn trong 8 từ",
+            "eyebrowsAnalysis": "Phân tích chi tiết về lông mày theo nhân tướng học Việt Nam bao gồm hình dạng, độ dày, độ cong, khoảng cách giữa hai lông mày, màu sắc, và ý nghĩa của nó đối với tính cách, sự nghiệp, và các mối quan hệ. Phân tích lông mày có cân đối, đẹp, báo hiệu vận may không. Viết ngắn trong 8 từ",
+            "chinAnalysis": "Phân tích chi tiết về cằm theo nhân tướng học Việt Nam bao gồm kích thước, hình dạng, độ nhọn, độ rộng, và ý nghĩa của nó đối với tính cách, ý chí, sự kiên định và vận mệnh. Phân tích cằm có mạnh mẽ, cân đối không, có mang đến sự thành công và ổn định không. Viết ngắn trong 8 từ"
+          },
+          "faceReadingScores": {
+            "eyes": số từ 1-10 đánh giá mắt theo nhân tướng học,
+            "nose": số từ 1-10 đánh giá mũi theo nhân tướng học,
+            "mouth": số từ 1-10 đánh giá miệng theo nhân tướng học,
+            "forehead": số từ 1-10 đánh giá trán theo nhân tướng học,
+            "eyebrows": số từ 1-10 đánh giá lông mày theo nhân tướng học,
+            "chin": số từ 1-10 đánh giá cằm theo nhân tướng học
+          },
+          "faceScore": số từ 1-10 là điểm tổng hợp (trung bình của điểm nhân trắc học và nhân tướng học),
+          "faceScoreRating": "Đánh giá tổng thể phù hợp với độ tuổi và giới tính (ví dụ: 'Dễ thương' cho trẻ em, 'Phong độ' cho nam thanh niên, 'Thanh lịch' cho phụ nữ trưởng thành, 'Phúc hậu' cho người cao tuổi)",
+          "physiognomy": {
+            "future": "Phân tích chi tiết về tương lai dựa trên nhân tướng học Việt Nam, bao gồm những dự đoán về sự phát triển cá nhân, những cơ hội và thách thức sắp tới trong 5-10 năm tới. Phân tích những thay đổi lớn trong cuộc sống, sự nghiệp, tình cảm và vị thế xã hội mà người này có thể trải qua. Viết ngắn trong 8 từ",
+            "fortune": "Phân tích chi tiết về tài lộc dựa trên nhân tướng học Việt Nam, bao gồm khả năng kiếm tiền, tích lũy tài sản, quản lý tài chính, và cơ hội đầu tư. Phân tích người này có dễ kiếm tiền không, có tài lộc bẩm sinh hay phải nỗ lực nhiều, có khả năng giữ và phát triển tài sản không.",
+            "relationships": "Phân tích chi tiết về các mối quan hệ xã hội dựa trên nhân tướng học Việt Nam, bao gồm các mối quan hệ gia đình, bạn bè và đồng nghiệp. Phân tích người này có khả năng tạo dựng mạng lưới quan hệ rộng không, có khả năng hòa nhập với nhóm không, có được sự tín nhiệm của người khác không. Viết ngắn trong 8 từ",
+            "romance": "Phân tích chi tiết về đời sống tình cảm dựa trên nhân tướng học Việt Nam, bao gồm tình yêu, hôn nhân và các mối quan hệ thân mật. Phân tích người này có dễ thu hút tình cảm không, có thành công trong hôn nhân không, có khả năng xây dựng mối quan hệ bền vững không. Viết ngắn trong 8 từ",
+            "career": "Phân tích chi tiết về sự nghiệp dựa trên nhân tướng học Việt Nam, bao gồm nghề nghiệp phù hợp, khả năng thăng tiến, phong cách làm việc, và những thách thức trong công việc. Phân tích người này phù hợp với nghề nào, có khả năng đạt được thành công lớn trong sự nghiệp không. Viết ngắn trong 8 từ",
+            "wisdom": "Phân tích chi tiết về trí tuệ dựa trên nhân tướng học Việt Nam, bao gồm IQ, EQ, trực giác, khả năng học tập và áp dụng kiến thức. Phân tích người này có thông minh, có khả năng ghi nhớ tốt, có khả năng sáng tạo không. Viết ngắn trong 8 từ"
+          },
+          "physiognomyScores": {
+            "future": số từ 1-10 đánh giá tương lai,
+            "career": số từ 1-10 đánh giá sự nghiệp,
+            "relationships": số từ 1-10 đánh giá các mối quan hệ xã hội,
+            "romance": số từ 1-10 đánh giá tình cảm,
+            "fortune": số từ 1-10 đánh giá tài lộc,
+            "wisdom": số từ 1-10 đánh giá trí tuệ
+          },
           "overallEvaluation": {
             "appearance": "Phân tích chi tiết về ngoại hình tổng thể của người này, bao gồm đặc điểm khuôn mặt, vẻ đẹp tổng thể, và ấn tượng đầu tiên mà họ tạo ra cho người khác. Đánh giá về sự hài hòa và cân đối, những nét độc đáo và đặc biệt trong ngoại hình. Viết ngắn trong 8 từ",
             "personality": "Phân tích chi tiết về tính cách dựa trên nhân tướng học Việt Nam, bao gồm đặc điểm tâm lý, cách ứng xử và giải quyết vấn đề. Phân tích người này có tính cách thế nào, có phù hợp với vị trí lãnh đạo không. Viết ngắn trong 8 từ",
@@ -351,11 +400,6 @@ class ApiService {
         const anthropometryScoreValues = Object.values(transformedData.anthropometryScores || {}).filter(score => typeof score === 'number');
         const faceReadingScoreValues = Object.values(transformedData.faceReadingScores || {}).filter(score => typeof score === 'number');
 
-        if (anthropometryScoreValues.length === 0 && faceReadingScoreValues.length === 0) {
-          // Không có đủ dữ liệu, giữ nguyên điểm gốc
-          return transformedData.faceScore || 5;
-        }
-
         // Tính điểm trung bình cho từng loại
         const anthropometryAvg = anthropometryScoreValues.length > 0
           ? anthropometryScoreValues.reduce((sum, score) => sum + score, 0) / anthropometryScoreValues.length
@@ -388,6 +432,11 @@ class ApiService {
         } else if (weightedScore < 7) {
           // Điểm 6-7: tăng 5%
           adjustedScore = weightedScore * 1.05;
+        }
+
+        if (faceReadingScoreValues.length === 0) {
+          // Không có đủ dữ liệu, giữ nguyên điểm gốc
+          return transformedData.faceScore || 5;
         }
         // Điểm từ 7 trở lên: giữ nguyên (công tâm với điểm cao)
 
