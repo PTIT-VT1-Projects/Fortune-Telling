@@ -39,7 +39,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
     return (
         <div className='row'>
             {/* Print area */}
-            <div className='d-none'>
+            <div>
                 <PrintArea ref={printRef} 
                     image={image} 
                     overallEvaluation={overallEvaluation} 

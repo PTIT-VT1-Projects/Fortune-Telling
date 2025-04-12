@@ -1,0 +1,7 @@
+.odd .feature-row:nth-child(even) {
+    display: none;
+}
+
+.even .feature-row:nth-child(odd) {
+    display: none;
+}
