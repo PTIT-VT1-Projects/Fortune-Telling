@@ -19,7 +19,7 @@ const PrintArea = React.forwardRef(({age, image: avatar, overallEvaluation, over
                 <div>
                     <img src={avatar} width={200} height={200}/>
                     <div className="user-simple-info mt-2">
-                        <span>{age} tuổi</span>
+                        <span>Tuổi dự đoán: {age}</span>
                     </div>
                 </div>
 

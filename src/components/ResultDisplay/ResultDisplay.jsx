@@ -430,7 +430,7 @@ const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
 
                         <div className="basic-info">
                             <div className="user-simple-info">
-                            {faceData?.basicInfo?.age} tuổi
+                            Tuổi dự đoán: {faceData?.basicInfo?.age} tuổi
                             </div>
                         </div>
 
