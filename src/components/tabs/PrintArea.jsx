@@ -2,25 +2,28 @@ import RadarChart from './RadarChart';
 import React from 'react'
 import ScoreMap from './ScoreMap';
 
-const PrintArea = React.forwardRef(({image: avatar, overallEvaluation, overallEvaluationScores}, ref) => {
+const PrintArea = React.forwardRef(({age, image: avatar, overallEvaluation, overallEvaluationScores}, ref) => {
     return (
         <div ref={ref}>
-            <div className='d-flex justify-content-between align-items-center ms-3 me-3'>
-                <img src='/images/ptit.png' alt='ptit' width={130} height={130} className='mt-3'/>
+            <div className='d-flex justify-content-between align-items-center ms-4 me-4 mt-4 align-items-center'>
+                <img src='/images/ptit.png' alt='ptit' width={80} height={80} />
                 <div>
-                    <p>Học viện Công nghệ Bưu chính Viễn thông</p>
-                    <p className='text-center'>Khoa Viễn thông 1</p>
+                    <p className='fw-bold m-0'>Học viện Công nghệ Bưu chính Viễn thông</p>
+                    <p className='text-center m-0'>Khoa Viễn thông 1</p>
                 </div>
-                <img src='/images/vt1.png' alt='ptit' width={130} height={130} className='mt-3'/>
+                <img src='/images/vt1.png' alt='ptit' width={80} height={80} />
             </div>
 
-            <div className='ml-3 mr-3 d-flex justify-content-center'>
+            <div className='ml-3 mr-3 mt-4 d-flex justify-content-center flex-column align-items-center'>
                 <img src={avatar} width={200} height={200}/>
+                <div className="user-simple-info mt-2">
+                    <span>{age} tuổi</span>
+                </div>
             </div>
 
-                <div className="row mt-4 me-3 align-items-center">
+                <div className="row mt-4 me-3 ms-3 align-items-center">
                     <div className='col-6'>
-                        <RadarChart width={350} height={350} overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
+                        <RadarChart width={370} height={370} overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
                     </div>
                     <div className='col-6'>
                         <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>

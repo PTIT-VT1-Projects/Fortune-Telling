@@ -15,7 +15,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
     const { overallEvaluation, overallEvaluationScores } = faceData || {};
 
     const print = useReactToPrint({
-            documentTitle: 'Title',
+            documentTitle: 'Fortune teller',
             contentRef: printRef,
         })
     
@@ -40,7 +40,12 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
         <div className='row'>
             {/* Print area */}
             <div className='d-none'>
-                <PrintArea ref={printRef} image={image} overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
+                <PrintArea ref={printRef} 
+                    image={image} 
+                    overallEvaluation={overallEvaluation} 
+                    overallEvaluationScores={overallEvaluationScores}
+                    age={faceData?.basicInfo?.age}
+                />
             </div>
             <div className='col-xl-6 col-12'>
                 <div className='mb-3 d-flex justify-content-center flex-column'>
