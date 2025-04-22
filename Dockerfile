@@ -1,6 +1,6 @@
 FROM node:20.11.1
 
-RUN sudo apt-get install nginx
+RUN apt-get update && apt-get install -y nginx
 
 WORKDIR /html
 COPY ./dist .
