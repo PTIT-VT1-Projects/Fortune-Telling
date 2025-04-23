@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nginx:
+    image: 'nginx:latest'
+    ports:
+      - "80:80"
+    volumes:
+      - "./fortune-telling.conf:/etc/nginx/conf.d"
+      - "./dist:/var/www/html"
+  
