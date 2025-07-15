@@ -8,7 +8,7 @@ import React from "react";
 
 // Initialize highcharts-more to enable polar/radar
 
-const RadarChart = ({width, height, overallEvaluation, overallEvaluationScores}) => {
+const RadarChart = ({overallEvaluation, overallEvaluationScores, width, height}) => {
     const options = {
         chart: {
             polar: true,
