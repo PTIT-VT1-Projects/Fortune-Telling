@@ -1,7 +1,5 @@
 import './Features.css';
 
-import React from 'react';
-
 function Features() {
   return (
     <div className="page-container features-page">

@@ -2,8 +2,9 @@ import RadarChart from './RadarChart';
 import React from 'react'
 import ScoreMap from './ScoreMap';
 import './PrintArea.css'
+import ProgressBar from '../ProgressBar/ProgressBar';
 
-const PrintArea = React.forwardRef(({age, image: avatar, overallEvaluation, overallEvaluationScores}, ref) => {
+const PrintArea = React.forwardRef(({age, image: avatar, overallEvaluation, overallEvaluationScores, fitnessLevel}, ref) => {
     return (
         <div ref={ref}>
             <div className='d-flex justify-content-between align-items-center ms-4 me-4 mt-4 align-items-center'>
@@ -28,14 +29,20 @@ const PrintArea = React.forwardRef(({age, image: avatar, overallEvaluation, over
                 </div>
             </div>
 
-                <div className="row mt-4 me-3 ms-3 align-items-center">
-                    <div className='col-6 odd'>
-                        <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
-                    </div>
-                    <div className='col-6 even'>
-                        <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
-                    </div>
+            <div className="row mt-4 me-3 ms-3 align-items-center">
+                <div className='col-6 odd'>
+                    <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
                 </div>
+                <div className='col-6 even'>
+                    <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores}/>
+                </div>
+            </div>
+
+            {/* Mức độ phù hợp */}
+            <div className='ms-4 me-4'>
+                <h4>Mức độ tương thích ngành Viễn thông</h4>
+                <ProgressBar randomNumber={fitnessLevel}/>
+            </div>
         </div>
     )
 });

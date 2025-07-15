@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import AnalysisProgress from '../AnalysisProgress/AnalysisProgress';
 import ImageService from '../../services/imageService';
-import OverallEvaluationTab from '../tabs/OverallEvaluationTab';
+import OverallEvaluationTab from '../../pages/OverallEvaluation/OverallEvaluationTab';
 
 const ResultDisplay = ({ image, faceData, onUploadNew, loading }) => {
     const [averageScore, setAverageScore] = useState(0);
