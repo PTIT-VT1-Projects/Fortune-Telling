@@ -8,6 +8,7 @@ import ScoreMap from '../../components/tabs/ScoreMap';
 import {getFeatureDetails} from '../../components/tabs/features';
 import { useReactToPrint } from 'react-to-print';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import mailService from '../../services/mailService';
 
 function OverallEvaluationTab({ faceData, isLoading, image }) {
     const printRef = useRef();
@@ -43,7 +44,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
     return (
     <div className='row'>
         {/* Print area */}
-        <div>
+        <div className='d-none'>
             <PrintArea ref={printRef} image={image} overallEvaluation={overallEvaluation}
                 overallEvaluationScores={overallEvaluationScores} age={faceData?.basicInfo?.age} 
                     fitnessLevel={fitnessLevel}
@@ -70,6 +71,8 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
         <div className='col-xl-6 col-12'>
             <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores} />
         </div>
+
+        <button onClick={() => mailService.send()}>Send mail</button>
     </div>
     );
     }
