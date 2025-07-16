@@ -8,6 +8,7 @@ import ScoreMap from '../../components/tabs/ScoreMap';
 import {getFeatureDetails} from '../../components/tabs/features';
 import { useReactToPrint } from 'react-to-print';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import EmailArea from './components/EmailArea/EmailArea';
 import mailService from '../../services/mailService';
 
 function OverallEvaluationTab({ faceData, isLoading, image }) {
@@ -20,8 +21,8 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
     const { overallEvaluation, overallEvaluationScores } = faceData || {};
 
     const print = useReactToPrint({
-    documentTitle: 'Fortune teller',
-    contentRef: printRef,
+        documentTitle: 'Fortune teller',
+        contentRef: printRef,
     })
 
 
@@ -44,16 +45,20 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
     return (
     <div className='row'>
         {/* Print area */}
-        <div className='d-none'>
-            <PrintArea ref={printRef} image={image} overallEvaluation={overallEvaluation}
+        <div>
+            <PrintArea ref={printRef} avatar={image} overallEvaluation={overallEvaluation}
                 overallEvaluationScores={overallEvaluationScores} age={faceData?.basicInfo?.age} 
                     fitnessLevel={fitnessLevel}
                 />
+            <EmailArea overallEvaluation={overallEvaluation}
+                overallEvaluationScores={overallEvaluationScores} age={faceData?.basicInfo?.age} 
+                    fitnessLevel={fitnessLevel}/>
         </div>
         <div className='col-xl-6 col-12'>
             <div className='mb-3 d-flex justify-content-center flex-column'>
                 <div>
-                    <button className='take-camera' onClick={print}> In</button>
+                    <button className='take-camera' onClick={print}>🖨️ In</button>
+                    <button className='take-camera ms-2' onClick={() => mailService.send(prompt('Nhập email'))}> ✉️ Gửi email</button>
                 </div>
                 <div className='align-items-center'>
                     <RadarChart overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores} />
@@ -71,8 +76,6 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
         <div className='col-xl-6 col-12'>
             <ScoreMap overallEvaluation={overallEvaluation} overallEvaluationScores={overallEvaluationScores} />
         </div>
-
-        <button onClick={() => mailService.send()}>Send mail</button>
     </div>
     );
     }

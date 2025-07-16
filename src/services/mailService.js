@@ -1,24 +1,36 @@
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 const mailService = {
-    send: async () => {
-        const response = await fetch('https://api.postmarkapp.com/email', {
-            method: 'POST',
-            headers: {
-            'X-Postmark-Server-Token': 'be521f1b-61f3-4714-b053-4afae6e67752',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-            From: 'nguyenhuucam91@gmail.com',
-            To: 'aten040791@gmail.com',
-            Subject: 'Test Email',
-            TextBody: 'Hello, this is a test email!',
-            }),
-        });
+    send: async (email) => {
+        const data = {
+            service_id: 'service_cgksh18',
+            template_id: 'template_95u5zzj',
+            user_id: 'OtZTnLHnhpS5Vvx75',
+            template_params: {
+                'email': email,  // Add the recipient's email address here,
+                'content': document.getElementById('emailArea').innerHTML
+            }
+};
 
-        const data = await response.json();
-        console.log(data);
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Không thể gửi email');
+        }
+    })
+    .then(() => {
+        alert('Gửi email thành công');
+    })
+    .catch(error => {
+        console.log("Oops: " + error)
+    });
+
     }
 }
 

@@ -4,9 +4,9 @@ import ScoreMap from './ScoreMap';
 import './PrintArea.css'
 import ProgressBar from '../ProgressBar/ProgressBar';
 
-const PrintArea = React.forwardRef(({age, image: avatar, overallEvaluation, overallEvaluationScores, fitnessLevel}, ref) => {
+const PrintArea = React.forwardRef(({age, avatar, overallEvaluation, overallEvaluationScores, fitnessLevel}, ref) => {
     return (
-        <div ref={ref}>
+        <div ref={ref} id="printArea">
             <div className='d-flex justify-content-between align-items-center ms-4 me-4 mt-4 align-items-center'>
                 <img src='/images/ptit.png' alt='ptit' width={80} height={80} />
                 <div>
