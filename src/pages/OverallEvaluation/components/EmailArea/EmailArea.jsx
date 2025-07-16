@@ -1,5 +1,5 @@
 import React from 'react';
-import EmailScoreMap from './EmailScoreMapEven';
+import EmailScoreMap from './EmailScoreMap';
 
 const emailAreaStyle = {
     fontFamily: 'Arial, sans-serif',
