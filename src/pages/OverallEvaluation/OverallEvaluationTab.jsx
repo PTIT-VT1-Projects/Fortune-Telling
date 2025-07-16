@@ -66,7 +66,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
             </div>
 
             {/* Progressbar */}
-            <div className=''>
+            <div className='mb-3'>
                 <h4>Mức độ tương thích ngành Viễn thông: </h4>
                 <ProgressBar randomNumber={fitnessLevel}/>
             </div>
