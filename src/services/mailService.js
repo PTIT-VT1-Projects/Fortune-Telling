@@ -3,9 +3,9 @@ import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 const mailService = {
     send: async (email) => {
         const data = {
-            service_id: 'service_cgksh18',
-            template_id: 'template_95u5zzj',
-            user_id: 'OtZTnLHnhpS5Vvx75',
+            service_id: 'service_amrawnk',
+            template_id: 'template_4hmc9cz',
+            user_id: 'gAKhq8OsMJZanj8w4',
             template_params: {
                 'email': email,  // Add the recipient's email address here,
                 'content': document.getElementById('emailArea').innerHTML
