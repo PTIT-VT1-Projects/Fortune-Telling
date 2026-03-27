@@ -1,20 +1,10 @@
-import config from '../config';
+import {createAppRequest} from '../config';
 
 class AiService {
     static async validatePortrait(imageBase64, mimeType) {
         try {
-            // Create abort controller for timeout
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 25000); // 25 second timeout
-
             try {
-                const response = await fetch(`${config.api.url}?key=${config.api.key}`, {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
+                const bodyData = JSON.stringify({
                         contents: [{
                             parts: [
                                 {
@@ -53,12 +43,8 @@ class AiService {
                         generationConfig: {
                             temperature: 0.1
                         }
-                    }),
-                    signal: controller.signal
-                });
-
-                // Clear the timeout
-                clearTimeout(timeoutId);
+                    })
+                const response = createAppRequest(bodyData)
 
                 if (!response.ok) {
                     const statusCode = response.status;
