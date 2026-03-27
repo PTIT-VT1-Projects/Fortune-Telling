@@ -5,7 +5,6 @@ const config = {
             key: import.meta.env.VITE_GEMINI_API_KEY,
             url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
         },
-    
         // Image processing configuration
         imageProcessing: {
             maxSizeInBytes: 20 * 1024 * 1024, // 20MB
@@ -21,5 +20,6 @@ const config = {
             copyrightYear: import.meta.env.VITE_APP_COPYRIGHT_YEAR || "2025"
         }
 };
+
 
 export default config;

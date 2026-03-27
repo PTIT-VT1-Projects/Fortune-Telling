@@ -1,4 +1,4 @@
-import config from '../config';
+import {createAppRequest} from '../config';
 
 /**
  * Service for handling API calls to the facial analysis service
@@ -12,7 +12,6 @@ class ApiService {
   static async analyzeFace(base64Image) {
     try {
       // Prepare the API request
-      const url = `${config.api.url}?key=${config.api.key}`;
 
       // Create the prompt for facial analysis
       const prompt = `
@@ -170,23 +169,11 @@ class ApiService {
         }
       };
 
-      // Network error handling with timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
-
       try {
         // Send the request
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(requestData),
-          signal: controller.signal
-        });
+        const response = createAppRequest(JSON.stringify(requestData), 30000)
 
         // Clear the timeout
-        clearTimeout(timeoutId);
 
         if (!response.ok) {
           const errorText = await response.text();
