@@ -3,7 +3,7 @@ const config = {
     // API configuration
         api: {
             key: import.meta.env.VITE_GEMINI_API_KEY,
-            url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+            url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
         },
     
         // Image processing configuration

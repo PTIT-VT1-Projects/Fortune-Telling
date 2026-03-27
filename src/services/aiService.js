@@ -123,7 +123,7 @@ class AiService {
                 error.message.includes('mạng')) {
                 throw error;
             }
-            throw new Error('Không thể xử lý phản hồi từ server AI. Vui lòng thử lại.');
+            throw new Error(error);
         }
     }
 
