@@ -4,47 +4,40 @@ class AiService {
     static async validatePortrait(imageBase64, mimeType) {
         try {
             try {
-                const bodyData = JSON.stringify({
-                        contents: [{
-                            parts: [
+                const parts = [
+                    {
+                        text: `You are an expert at analyzing human portrait photos. Your task is to determine if the provided image is a valid human portrait.
+                                VALIDATION RULES:
+                                1. The image must contain exactly ONE human face
+                                2. The face must be clearly visible
+                                3. The face must be a real human face (not a drawing, cartoon, or object)
+
+                                RESPONSE FORMAT: You must respond with ONLY a JSON object in this format:
                                 {
-                                    text: `You are an expert at analyzing human portrait photos. Your task is to determine if the provided image is a valid human portrait.
-                                            VALIDATION RULES:
-                                            1. The image must contain exactly ONE human face
-                                            2. The face must be clearly visible
-                                            3. The face must be a real human face (not a drawing, cartoon, or object)
-
-                                            RESPONSE FORMAT: You must respond with ONLY a JSON object in this format:
-                                            {
-                                            "isValidPortrait": true/false,
-                                            "validationError": null or error message describing what's wrong with the image
-                                            }
-
-                                            All error messages must be in Vietnamese. 
-                                            For valid portraits, set isValidPortrait to true and validationError to null.
-                                            For invalid images, set isValidPortrait to false and provide a descriptive error message in Vietnamese.
-
-                                            Common error messages in Vietnamese:
-                                            - "Không tìm thấy khuôn mặt nào trong ảnh" (No face detected)
-                                            - "Phát hiện nhiều khuôn mặt trong ảnh" (Multiple faces detected)
-                                            - "Khuôn mặt không rõ ràng" (Face not clearly visible)
-                                            - "Không phải khuôn mặt thật" (Not a real human face)
-                                            - "Khuôn mặt bị che quá nhiều" (Face is too covered)
-                                            - "Ảnh không phải là chân dung" (Image is not a portrait)`
-                                                                            },
-                                {
-                                    inline_data: {
-                                        mime_type: mimeType,
-                                        data: imageBase64.split(',')[1]
-                                    }
+                                "isValidPortrait": true/false,
+                                "validationError": null or error message describing what's wrong with the image
                                 }
-                            ]
-                        }],
-                        generationConfig: {
-                            temperature: 0.1
+
+                                All error messages must be in Vietnamese. 
+                                For valid portraits, set isValidPortrait to true and validationError to null.
+                                For invalid images, set isValidPortrait to false and provide a descriptive error message in Vietnamese.
+
+                                Common error messages in Vietnamese:
+                                - "Không tìm thấy khuôn mặt nào trong ảnh" (No face detected)
+                                - "Phát hiện nhiều khuôn mặt trong ảnh" (Multiple faces detected)
+                                - "Khuôn mặt không rõ ràng" (Face not clearly visible)
+                                - "Không phải khuôn mặt thật" (Not a real human face)
+                                - "Khuôn mặt bị che quá nhiều" (Face is too covered)
+                                - "Ảnh không phải là chân dung" (Image is not a portrait)`
+                                                                },
+                    {
+                        inline_data: {
+                            mime_type: mimeType,
+                            data: imageBase64.split(',')[1]
                         }
-                    })
-                const response = createAppRequest(bodyData)
+                    }
+                ]
+                const response = createAppRequest(parts)
 
                 if (!response.ok) {
                     const statusCode = response.status;
@@ -109,7 +102,7 @@ class AiService {
                 error.message.includes('mạng')) {
                 throw error;
             }
-            throw new Error('Không thể xử lý phản hồi từ server AI. Vui lòng thử lại.');
+            throw new Error(error);
         }
     }
 

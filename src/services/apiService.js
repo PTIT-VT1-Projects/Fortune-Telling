@@ -147,31 +147,21 @@ class ApiService {
       `;
 
       // Prepare the request data
-      const requestData = {
-        contents: [
-          {
-            parts: [
-              { text: prompt },
-              {
-                inline_data: {
-                  mime_type: "image/jpeg",
-                  data: base64Image.split(',')[1] || base64Image // Handle both formats
-                }
+      const requestDataContent = {
+          parts: [
+            { text: prompt },
+            {
+              inline_data: {
+                mime_type: "image/jpeg",
+                data: base64Image.split(',')[1] || base64Image // Handle both formats
               }
-            ]
-          }
-        ],
-        generationConfig: {
-          temperature: 0.1,
-          topK: 32,
-          topP: 0.95,
-          maxOutputTokens: 4096,
-        }
+            }
+          ]
       };
 
       try {
         // Send the request
-        const response = createAppRequest(JSON.stringify(requestData), 30000)
+        const response = createAppRequest(JSON.stringify(requestDataContent), 30000)
 
         // Clear the timeout
 

@@ -32,26 +32,47 @@ const config = {
         }
 };
 
-const createAppRequest = async (bodyData, timeout) => {
-    switch(config.vendor) {
-        case 'gemini': {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), timeout); // 30 second timeout
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${config.ai.gemini.api.key}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: bodyData,
-                signal: controller.signal
-            });
-            clearTimeout(timeoutId)
-            return response;
+const createAppRequest = async (bodyData, timeout = 30000) => {
+    console.log({messages: bodyData})
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+        let url = "";
+        let headers = {
+            "Content-Type": "application/json"
+        };
+
+        switch (config.vendor) {
+            case "gemini":
+                url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${config.ai.gemini.api.key}`;
+                bodyData = typeof bodyData != "string" ? JSON.stringify(bodyData) : bodyData;
+                break;
+
+            case "deepseek":
+                url = "https://api.deepseek.com/chat/completions";
+                headers.Authorization = `Bearer ${config.ai.deepseek.api.key}`;
+                break;
+
+            default:
+                throw new Error(`Unsupported vendor: ${config.vendor}`);
         }
-        case 'deepseek': {
-            return 'https://api.deepseek.com/chat/completions'
+
+        const response = await fetch(url, {
+            method: "POST",
+            headers,
+            body: bodyData,
+            signal: controller.signal
+        });
+
+        return response;
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error(`Request timeout after ${timeout} ms`);
         }
+        throw error;
+    } finally {
+        clearTimeout(timeoutId);
     }
-}
+};
 
 export {config, createAppRequest};
