@@ -1,6 +1,4 @@
-import './Features.css';
-
-import React from 'react';
+import "./Features.css";
 
 function Features() {
   return (
@@ -14,13 +12,16 @@ function Features() {
                 <img
                   src="/images/overview.svg"
                   alt="Tổng quan"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
             </div>
             <div className="feature-text">
               <h2 className="feature-title">TỔNG QUAN</h2>
-              <p>Đưa ra các đánh giá toàn diện vể ngoại hình, tính cách, điểm mạnh yếu hay phong cách sống của bạn.</p>
+              <p>
+                Đưa ra các đánh giá toàn diện vể ngoại hình, tính cách, điểm
+                mạnh yếu hay phong cách sống của bạn.
+              </p>
             </div>
           </div>
 
@@ -31,13 +32,16 @@ function Features() {
                 <img
                   src="/images/physiognomy.svg"
                   alt="Tướng số học"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
             </div>
             <div className="feature-text">
               <h2 className="feature-title">TƯỚNG SỐ</h2>
-              <p>Phân tích khuôn mặt dựa trên tướng số học, cho kết quả về tình cảm, vận mệnh, tài lộc, sự nghiệp và tương lai.</p>
+              <p>
+                Phân tích khuôn mặt dựa trên tướng số học, cho kết quả về tình
+                cảm, vận mệnh, tài lộc, sự nghiệp và tương lai.
+              </p>
             </div>
           </div>
 
@@ -48,13 +52,16 @@ function Features() {
                 <img
                   src="/images/anthropometry.svg"
                   alt="Nhân trắc học"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
             </div>
             <div className="feature-text">
               <h2 className="feature-title">NHÂN TRẮC</h2>
-              <p>Phân tích khuôn mặt dựa trên nhân trắc học, đưa ra các thông số định lượng, chỉ số cân đối và đánh giá sự hài hòa.</p>
+              <p>
+                Phân tích khuôn mặt dựa trên nhân trắc học, đưa ra các thông số
+                định lượng, chỉ số cân đối và đánh giá sự hài hòa.
+              </p>
             </div>
           </div>
 
@@ -65,13 +72,16 @@ function Features() {
                 <img
                   src="/images/face-reading.svg"
                   alt="Nhân tướng học"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
             </div>
             <div className="feature-text">
               <h2 className="feature-title">NHÂN TƯỚNG</h2>
-              <p>Phân tích khuôn mặt dựa trên nhân tướng học, cho đánh giá chuyên sâu về tính thẩm mỹ của các bộ phận trên khuôn mặt.</p>
+              <p>
+                Phân tích khuôn mặt dựa trên nhân tướng học, cho đánh giá chuyên
+                sâu về tính thẩm mỹ của các bộ phận trên khuôn mặt.
+              </p>
             </div>
           </div>
         </div>

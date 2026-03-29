@@ -1,4 +1,4 @@
-import AiService from './aiService';
+import AiService from '../api/aiService';
 
 /**
  * Service for handling image processing operations

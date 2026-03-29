@@ -1,4 +1,4 @@
-import config from '../config';
+import config from "../config";
 
 /**
  * Service for handling API calls to the facial analysis service
@@ -156,18 +156,18 @@ class ApiService {
               {
                 inline_data: {
                   mime_type: "image/jpeg",
-                  data: base64Image.split(',')[1] || base64Image // Handle both formats
-                }
-              }
-            ]
-          }
+                  data: base64Image.split(",")[1] || base64Image, // Handle both formats
+                },
+              },
+            ],
+          },
         ],
         generationConfig: {
           temperature: 0.1,
           topK: 32,
           topP: 0.95,
           maxOutputTokens: 4096,
-        }
+        },
       };
 
       // Network error handling with timeout
@@ -177,12 +177,12 @@ class ApiService {
       try {
         // Send the request
         const response = await fetch(url, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(requestData),
-          signal: controller.signal
+          signal: controller.signal,
         });
 
         // Clear the timeout
@@ -194,9 +194,11 @@ class ApiService {
 
           // Handle different HTTP error codes
           if (statusCode >= 500) {
-            throw new Error(`Lỗi máy chủ API (${statusCode}). Vui lòng thử lại sau.`);
+            throw new Error(
+              `Lỗi máy chủ API (${statusCode}). Vui lòng thử lại sau.`,
+            );
           } else if (statusCode === 429) {
-            throw new Error('API đang quá tải. Vui lòng thử lại sau ít phút.');
+            throw new Error("API đang quá tải. Vui lòng thử lại sau ít phút.");
           } else if (statusCode >= 400) {
             throw new Error(`Lỗi yêu cầu API (${statusCode}): ${errorText}`);
           } else {
@@ -216,24 +218,34 @@ class ApiService {
         return finalResult;
       } catch (fetchError) {
         // Handle network errors and timeouts
-        if (fetchError.name === 'AbortError') {
-          throw new Error('Yêu cầu API đã hết thời gian. Vui lòng kiểm tra kết nối mạng và thử lại.');
-        } else if (fetchError.message.includes('network') || fetchError.message.includes('Network') || !navigator.onLine) {
-          throw new Error('Không thể kết nối tới API. Vui lòng kiểm tra kết nối mạng và thử lại.');
+        if (fetchError.name === "AbortError") {
+          throw new Error(
+            "Yêu cầu API đã hết thời gian. Vui lòng kiểm tra kết nối mạng và thử lại.",
+          );
+        } else if (
+          fetchError.message.includes("network") ||
+          fetchError.message.includes("Network") ||
+          !navigator.onLine
+        ) {
+          throw new Error(
+            "Không thể kết nối tới API. Vui lòng kiểm tra kết nối mạng và thử lại.",
+          );
         }
         throw fetchError;
       }
     } catch (error) {
       // If the error already has a user-friendly message from our try/catch blocks above, use it
-      if (error.message.includes('API') ||
-        error.message.includes('kết nối') ||
-        error.message.includes('thử lại') ||
-        error.message.includes('máy chủ')) {
+      if (
+        error.message.includes("API") ||
+        error.message.includes("kết nối") ||
+        error.message.includes("thử lại") ||
+        error.message.includes("máy chủ")
+      ) {
         throw error;
       }
 
       // Generic error for all other cases
-      throw new Error('Không thể phân tích khuôn mặt. Vui lòng thử lại.');
+      throw new Error("Không thể phân tích khuôn mặt. Vui lòng thử lại.");
     }
   }
 
@@ -245,15 +257,20 @@ class ApiService {
   static processApiResponse(response) {
     try {
       // Check if response has the expected structure
-      if (!response || !response.candidates || !response.candidates[0] || !response.candidates[0].content) {
-        throw new Error('Invalid API response structure');
+      if (
+        !response ||
+        !response.candidates ||
+        !response.candidates[0] ||
+        !response.candidates[0].content
+      ) {
+        throw new Error("Invalid API response structure");
       }
 
       // Extract the text content from the response
       const content = response.candidates[0].content;
 
       if (!content.parts || !content.parts[0] || !content.parts[0].text) {
-        throw new Error('No text content in API response');
+        throw new Error("No text content in API response");
       }
 
       const text = content.parts[0].text;
@@ -279,26 +296,28 @@ class ApiService {
           // Remove any non-JSON text before and after the JSON object
           let cleanedText = text.trim();
           // Find the first '{' and the last '}'
-          const startIndex = cleanedText.indexOf('{');
-          const endIndex = cleanedText.lastIndexOf('}');
+          const startIndex = cleanedText.indexOf("{");
+          const endIndex = cleanedText.lastIndexOf("}");
 
           if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
             cleanedText = cleanedText.substring(startIndex, endIndex + 1);
             parsedData = JSON.parse(cleanedText);
           }
-        } catch (cleaningError) {
+        } catch (error) {
           // Failed all attempts
         }
 
         // If all parsing attempts fail, throw an error
         if (!parsedData) {
-          throw new Error('Failed to parse API response as JSON');
+          throw new Error("Failed to parse API response as JSON");
         }
       }
 
       // Get chin data from API response
       const chinData = parsedData.faceReading?.chinAnalysis || "";
-      const chinScore = parsedData.faceFeatureScores?.chin || parsedData.faceReadingScores?.chin;
+      const chinScore =
+        parsedData.faceFeatureScores?.chin ||
+        parsedData.faceReadingScores?.chin;
 
       // Transform the data to match the component expected structure
       const transformedData = {
@@ -318,7 +337,7 @@ class ApiService {
           chin: chinData,
           chinAnalysis: chinData,
           eyebrows: parsedData.faceReading?.eyebrowsAnalysis || "",
-          eyebrowsDescription: parsedData.faceReading?.eyebrowsAnalysis || ""
+          eyebrowsDescription: parsedData.faceReading?.eyebrowsAnalysis || "",
         },
 
         // Ensure faceReadingData is properly structured for the component
@@ -328,60 +347,65 @@ class ApiService {
               name: "forehead",
               key: "forehead",
               title: "Trán",
-              description: parsedData.faceReading?.foreheadAnalysis || ""
+              description: parsedData.faceReading?.foreheadAnalysis || "",
             },
             {
               name: "eyes",
               key: "eyes",
               title: "Mắt",
-              description: parsedData.faceReading?.eyesAnalysis || ""
+              description: parsedData.faceReading?.eyesAnalysis || "",
             },
             {
               name: "nose",
               key: "nose",
               title: "Mũi",
-              description: parsedData.faceReading?.noseAnalysis || ""
+              description: parsedData.faceReading?.noseAnalysis || "",
             },
             {
               name: "mouth",
               key: "mouth",
               title: "Miệng",
-              description: parsedData.faceReading?.mouthAnalysis || ""
+              description: parsedData.faceReading?.mouthAnalysis || "",
             },
             {
               name: "chin",
               key: "chin",
               title: "Cằm",
-              description: chinData
+              description: chinData,
             },
             {
               name: "eyebrows",
               key: "eyebrows",
               title: "Lông mày",
-              description: parsedData.faceReading?.eyebrowsAnalysis || ""
-            }
-          ]
+              description: parsedData.faceReading?.eyebrowsAnalysis || "",
+            },
+          ],
         },
 
         // Ensure physiognomy is properly structured for the component
         physiognomy: {
-          future: parsedData.physiognomy?.future || parsedData.physiognomy?.destiny || "",
+          future:
+            parsedData.physiognomy?.future ||
+            parsedData.physiognomy?.destiny ||
+            "",
           fortune: parsedData.physiognomy?.fortune || "",
           relationships: parsedData.physiognomy?.relationships || "",
           romance: parsedData.physiognomy?.romance || "",
           career: parsedData.physiognomy?.career || "",
-          wisdom: parsedData.physiognomy?.wisdom || ""
+          wisdom: parsedData.physiognomy?.wisdom || "",
         },
 
         // Ensure physiognomyScores is properly passed to the component
         physiognomyScores: {
-          future: parsedData.physiognomyScores?.future !== undefined ? parsedData.physiognomyScores?.future :
-            parsedData.physiognomyScores?.destiny,
+          future:
+            parsedData.physiognomyScores?.future !== undefined
+              ? parsedData.physiognomyScores?.future
+              : parsedData.physiognomyScores?.destiny,
           career: parsedData.physiognomyScores?.career,
           relationships: parsedData.physiognomyScores?.relationships,
           romance: parsedData.physiognomyScores?.romance,
           fortune: parsedData.physiognomyScores?.fortune,
-          wisdom: parsedData.physiognomyScores?.wisdom
+          wisdom: parsedData.physiognomyScores?.wisdom,
         },
 
         // Make sure anthropometryScores is properly passed to the component
@@ -390,30 +414,38 @@ class ApiService {
         // Add chinScore to faceReadingScores
         faceReadingScores: {
           ...parsedData.faceReadingScores,
-          chin: chinScore
-        }
+          chin: chinScore,
+        },
       };
 
       // Tính điểm tổng hợp (faceScore) phù hợp với thị trường Việt Nam
       const processScores = () => {
         // Lấy điểm từ nhân trắc học và nhân tướng học
-        const anthropometryScoreValues = Object.values(transformedData.anthropometryScores || {}).filter(score => typeof score === 'number');
-        const faceReadingScoreValues = Object.values(transformedData.faceReadingScores || {}).filter(score => typeof score === 'number');
+        const anthropometryScoreValues = Object.values(
+          transformedData.anthropometryScores || {},
+        ).filter((score) => typeof score === "number");
+        const faceReadingScoreValues = Object.values(
+          transformedData.faceReadingScores || {},
+        ).filter((score) => typeof score === "number");
 
         // Tính điểm trung bình cho từng loại
-        const anthropometryAvg = anthropometryScoreValues.length > 0
-          ? anthropometryScoreValues.reduce((sum, score) => sum + score, 0) / anthropometryScoreValues.length
-          : 0;
+        const anthropometryAvg =
+          anthropometryScoreValues.length > 0
+            ? anthropometryScoreValues.reduce((sum, score) => sum + score, 0) /
+              anthropometryScoreValues.length
+            : 0;
 
-        const faceReadingAvg = faceReadingScoreValues.length > 0
-          ? faceReadingScoreValues.reduce((sum, score) => sum + score, 0) / faceReadingScoreValues.length
-          : 0;
+        const faceReadingAvg =
+          faceReadingScoreValues.length > 0
+            ? faceReadingScoreValues.reduce((sum, score) => sum + score, 0) /
+              faceReadingScoreValues.length
+            : 0;
 
         // Áp dụng trọng số phù hợp với thẩm mỹ Việt Nam
         // Nhân tướng học (55%) được đánh giá cao hơn nhân trắc học (45%)
         let weightedScore;
         if (anthropometryAvg > 0 && faceReadingAvg > 0) {
-          weightedScore = (anthropometryAvg * 0.45) + (faceReadingAvg * 0.55);
+          weightedScore = anthropometryAvg * 0.45 + faceReadingAvg * 0.55;
         } else if (anthropometryAvg > 0) {
           weightedScore = anthropometryAvg;
         } else {
@@ -446,10 +478,9 @@ class ApiService {
 
       // Áp dụng công thức mới
       transformedData.faceScore = processScores();
-
       return transformedData;
     } catch (error) {
-      throw new Error('Không thể xử lý kết quả phân tích. Vui lòng thử lại.');
+      throw new Error("Không thể xử lý kết quả phân tích. Vui lòng thử lại.");
     }
   }
 
