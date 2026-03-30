@@ -1,7 +1,7 @@
 .emotion-area {
   border: 2px dashed #cbd5e1;
   border-radius: 24px;
-  padding: 60px 40px;
+  padding: 0px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,8 +14,44 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 
 .arena {
   margin-top: 30px;
+}
+
+.btn-compare {
+  background: #fe0d0b;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  z-index: 100000;
+}
+
+.btn-compare:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.compare-result {
+  height: 100%;
+}
+
+.counter {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #064ef6;
+  text-align: center;
+  counter-reset: num 0; /* Giá trị mặc định khi chưa nhấn */
 }

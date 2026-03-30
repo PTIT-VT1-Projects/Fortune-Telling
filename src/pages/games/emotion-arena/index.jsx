@@ -1,12 +1,31 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import styles from "./index.module.css";
 import imageUtil from "../../../utils/imageUtil";
 import imageCompareService from "../../../services/imageCompareService";
 
+const imageModules = import.meta.glob(
+  "/src/pages/games/emotion-arena/resources/*.{png,jpg,jpeg,webp}",
+  {
+    eager: true,
+    import: "default",
+  },
+);
+
+const imageList = Object.values(imageModules);
+
+export function getRandomImage() {
+  if (!imageList.length) return null;
+  const randomIndex = Math.floor(Math.random() * imageList.length);
+  return imageList[randomIndex];
+}
+
 const EmotionArena = () => {
+  const [selectedMeme, setSelectedMeme] = useState(getRandomImage());
   const comparedImageRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [comparedImageAccuracy, setComparedImageAccuracy] = useState(0);
+  const [isRefreshed, setIsRefreshed] = useState(false);
 
   // Compare image based on 2 base64 image
   const compareImage = async () => {
@@ -31,12 +50,36 @@ const EmotionArena = () => {
         myImageBase64,
         comparedImageBase64,
       );
-      console.log(result);
+
+      //Animating
+      const startTime = performance.now();
+      const duration = 6000;
+
+      const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+      const step = (now) => {
+        const t = Math.min((now - startTime) / duration, 1);
+        setComparedImageAccuracy(
+          Math.round(parseInt(result.similarity_percentage) * easeOut(t)),
+        );
+        if (t < 1) requestAnimationFrame(step);
+      };
+
+      setIsRefreshed(true);
+      requestAnimationFrame(step);
     } catch (err) {
       console.log("Error on compared image: " + err);
     }
   };
 
+  // Reset image
+  const resetImage = () => {
+    setIsRefreshed(false);
+    setSelectedMeme(getRandomImage());
+    setComparedImageAccuracy(0);
+  };
+
+  // Streaming video
   useEffect(() => {
     let stream;
 
@@ -64,31 +107,46 @@ const EmotionArena = () => {
       <div className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">Đấu trường cảm xúc</h1>
+          <div className="hero-subtitle">
+            Đối đầu biểu cảm, bùng nổ thần thái.
+          </div>
           <div className="hero-decoration"></div>
         </div>
-
         <div className={styles["arena"]}>
           <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-4">
               <div className={styles["emotion-area"]}>
                 <video
                   ref={videoRef}
                   autoPlay
                   playsInline
-                  style={{ width: "100%", maxWidth: 250 }}
+                  style={{ width: "100%", maxWidth: "100%", height: "100%" }}
                 />
                 <canvas ref={canvasRef} style={{ display: "none" }} />
               </div>
             </div>
-            <div className="col-md-2">
-              <button onClick={compareImage}>Compare</button>
+            <div className="col-md-4">
+              <div
+                className={`d-flex flex-column justify-content-center ${styles["compare-result"]}`}
+              >
+                <button
+                  className={styles["btn-compare"]}
+                  onClick={!isRefreshed ? compareImage : resetImage}
+                >
+                  {!isRefreshed ? "So sánh" : "Tải lại"}
+                </button>
+                <h2 className={`mt-2 ${styles["counter"]}`}>
+                  {comparedImageAccuracy}%
+                </h2>
+              </div>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-4">
               <div className={styles["emotion-area"]}>
                 <img
                   ref={comparedImageRef}
-                  src="https://www.shutterstock.com/image-photo/handsome-happy-african-american-bearded-260nw-2460702995.jpg"
+                  src={selectedMeme}
                   alt="smile"
+                  width="100%"
                 />
               </div>
             </div>
