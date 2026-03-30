@@ -22,6 +22,7 @@ function App() {
             <Routes>
               <Route path="/games">
                 <Route path="face-reading" element={<FaceReading />}></Route>
+                <Route path="emotion-area" element={<FaceReading />}></Route>
                 <Route path="" index element={<Games />} />
               </Route>
               <Route path="/features" element={<Features />} />

@@ -1,0 +1,191 @@
+.overall-chart-panel {
+  width: 100%;
+}
+
+.overall-chart-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.overall-chart-wrapper {
+  width: 100%;
+  max-width: 560px;
+  height: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Common tab styling */
+.tab-container {
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.feature-row {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(248, 249, 250);
+  border-radius: 12px;
+  padding: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(229, 231, 235);
+  border-image: initial;
+  transition: 0.3s;
+  animation: 0.5s ease-out 0s 1 normal none running fadeIn;
+  margin-bottom: 12px;
+}
+
+.feature-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: red;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feature-description {
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+  color: #333;
+  font-size: 0.8rem;
+}
+
+.feature-score {
+  display: flex;
+  align-items: center;
+}
+
+.score-badge {
+  background: red;
+  color: white;
+  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(67, 97, 238, 0.4);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.score-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(67, 97, 238, 0.5);
+}
+
+/* Special score badge for important features like Physiognomy */
+.score-badge-highlight {
+  background: red;
+  color: white;
+  border-radius: 10px;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 13px;
+  margin-left: 8px;
+}
+
+.loading-message {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+canvas[role="img"] {
+  width: 100%;
+}
+/* Anthropometry Tab */
+.anthropometry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.ratio-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ratio-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: red;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ratio-details {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ratio-value {
+  font-weight: 500;
+  color: #333;
+}
+
+.ratio-ideal {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .tab-container {
+    padding: 0.75rem;
+  }
+
+  .feature-name {
+    font-size: 1rem;
+  }
+
+  .feature-description {
+    font-size: 0.9rem;
+  }
+
+  .score-badge {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media print {
+  /* Ép trình duyệt in các màu nền và đồ họa */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Đảm bảo SVG của Recharts hiển thị đúng */
+  .recharts-wrapper svg {
+    display: block !important;
+    overflow: visible !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}

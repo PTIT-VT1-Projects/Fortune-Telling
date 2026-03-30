@@ -4,42 +4,16 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import AnalysisProgress from "../AnalysisProgress/AnalysisProgress";
 import ImageService from "../../services/imageService";
+import ImageSnapshot from "../ImageSnapshot/index";
 
 const ImageUploader = ({ onImageSelect }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [useCamera, setUseCamera] = useState(true);
+  const [isUsingCamera, setIsUsingCamera] = useState(true);
 
-  // open camera
-  useEffect(() => {
-    // Mở webcam khi component mount
-    if (useCamera) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          videoRef.current.srcObject = stream;
-        })
-        .catch((err) => {
-          console.error("Lỗi mở webcam: ", err);
-        });
-    }
-  }, [useCamera]);
-
-  //chụp ảnh
-  const handleCapture = () => {
-    const canvas = canvasRef.current;
-    const video = videoRef.current;
-
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-
-    const context = canvas.getContext("2d");
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    const imageDataURL = canvas.toDataURL("image/png");
-    handleFileSelect(ImageService.base64ToImageFile(imageDataURL));
+  //Xử lí hậu kì chụp ảnh
+  const handleAfterSnapshot = (imageDataUrl) => {
+    handleFileSelect(ImageService.base64ToImageFile(imageDataUrl));
   };
 
   const handleFileSelect = useCallback(
@@ -85,22 +59,12 @@ const ImageUploader = ({ onImageSelect }) => {
 
       <div className="upload-container">
         <div className="upload-area">
-          {useCamera && (
-            <>
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                style={{ width: "100%", maxWidth: 250 }}
-              />
-              <button onClick={handleCapture} className="take-camera">
-                📸 Chụp ảnh
-              </button>
-              <canvas ref={canvasRef} style={{ display: "none" }} />
-            </>
-          )}
+          <ImageSnapshot
+            isUsingCamera={isUsingCamera}
+            handleAfterSnapshot={handleAfterSnapshot}
+          />
 
-          {!useCamera && (
+          {!isUsingCamera && (
             <div onClick={handleUploadClick}>
               <div className="upload-icon">
                 <svg
@@ -131,13 +95,19 @@ const ImageUploader = ({ onImageSelect }) => {
           )}
         </div>
         {/* Manual upload */}
-        {useCamera && (
-          <p style={{ cursor: "pointer" }} onClick={() => setUseCamera(false)}>
+        {isUsingCamera && (
+          <p
+            style={{ cursor: "pointer" }}
+            onClick={() => setIsUsingCamera(false)}
+          >
             Không quay được camera? Ấn vào đây để tải ảnh lên
           </p>
         )}
-        {!useCamera && (
-          <p style={{ cursor: "pointer" }} onClick={() => setUseCamera(true)}>
+        {!isUsingCamera && (
+          <p
+            style={{ cursor: "pointer" }}
+            onClick={() => setIsUsingCamera(true)}
+          >
             Quay lại trang quét camera
           </p>
         )}

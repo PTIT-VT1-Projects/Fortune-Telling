@@ -6,8 +6,11 @@ function Features() {
     <div className="page-container features-page">
       <div className="page-content">
         <div className="features-grid">
-          {/* Tổng quan */}
-          <div className="feature-card">
+          {/* Trò chơi 1 */}
+          <div
+            className="feature-card"
+            onClick={() => navigate("face-reading")}
+          >
             <div className="feature-icon-container">
               <div className="feature-icon overview-icon">
                 <img
@@ -17,10 +20,7 @@ function Features() {
                 />
               </div>
             </div>
-            <div
-              className="feature-text"
-              onClick={() => navigate("face-reading")}
-            >
+            <div className="feature-text">
               <h2 className="feature-title">BÓI MẶT AI</h2>
               <p>
                 Chụp ảnh bằng camera để AI đoán tuổi, soi tính cách và chấm điểm
@@ -29,8 +29,11 @@ function Features() {
             </div>
           </div>
 
-          {/* Tướng số học */}
-          <div className="feature-card">
+          {/* Trò chơi 2 */}
+          <div
+            className="feature-card"
+            onClick={() => navigate("emotion-area")}
+          >
             <div className="feature-icon-container">
               <div className="feature-icon physiognomy-icon">
                 <img
