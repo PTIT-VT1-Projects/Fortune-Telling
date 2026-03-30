@@ -44,7 +44,7 @@
   font-weight: 800;
   color: var(--dark-text);
   margin-bottom: 20px;
-  background: red;
+  background: #c7000f;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -67,7 +67,7 @@
 .hero-decoration {
   width: 100px;
   height: 4px;
-  background: red;
+  background: #d40303;
   margin: 30px auto 0;
   border-radius: 4px;
   position: relative;
@@ -80,7 +80,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: red;
+  background: #d40303;
   top: 50%;
   transform: translateY(-50%);
 }

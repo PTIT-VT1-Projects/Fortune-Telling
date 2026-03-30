@@ -3,29 +3,14 @@ import styles from "./index.module.css";
 import imageUtil from "../../../utils/imageUtil";
 import imageCompareService from "../../../services/imageCompareService";
 
-const imageModules = import.meta.glob(
-  "/src/pages/games/emotion-arena/resources/*.{png,jpg,jpeg,webp}",
-  {
-    eager: true,
-    import: "default",
-  },
-);
-
-const imageList = Object.values(imageModules);
-
-export function getRandomImage() {
-  if (!imageList.length) return null;
-  const randomIndex = Math.floor(Math.random() * imageList.length);
-  return imageList[randomIndex];
-}
-
 const EmotionArena = () => {
-  const [selectedMeme, setSelectedMeme] = useState(getRandomImage());
+  const [selectedMeme, setSelectedMeme] = useState(imageUtil.getRandomImage());
   const comparedImageRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [comparedImageAccuracy, setComparedImageAccuracy] = useState(0);
   const [isRefreshed, setIsRefreshed] = useState(false);
+  const [capturedImage, setCapturedImage] = useState(null);
 
   // Compare image based on 2 base64 image
   const compareImage = async () => {
@@ -51,7 +36,7 @@ const EmotionArena = () => {
         comparedImageBase64,
       );
 
-      //Animating
+      //Animating similarity accuracy
       const startTime = performance.now();
       const duration = 6000;
 
@@ -65,6 +50,7 @@ const EmotionArena = () => {
         if (t < 1) requestAnimationFrame(step);
       };
 
+      setCapturedImage(myImageBase64);
       setIsRefreshed(true);
       requestAnimationFrame(step);
     } catch (err) {
@@ -75,8 +61,9 @@ const EmotionArena = () => {
   // Reset image
   const resetImage = () => {
     setIsRefreshed(false);
-    setSelectedMeme(getRandomImage());
+    setSelectedMeme(imageUtil.getRandomImage());
     setComparedImageAccuracy(0);
+    setCapturedImage(null);
   };
 
   // Streaming video
@@ -100,7 +87,7 @@ const EmotionArena = () => {
         stream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [capturedImage]);
 
   return (
     <>
@@ -116,18 +103,30 @@ const EmotionArena = () => {
           <div className="row">
             <div className="col-md-4">
               <div className={styles["emotion-area"]}>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  style={{ width: "100%", maxWidth: "100%", height: "100%" }}
-                />
+                {capturedImage ? (
+                  <img
+                    src={capturedImage}
+                    alt="captured"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    style={{ width: "100%", maxWidth: "100%", height: "100%" }}
+                  />
+                )}
                 <canvas ref={canvasRef} style={{ display: "none" }} />
               </div>
             </div>
             <div className="col-md-4">
               <div
-                className={`d-flex flex-column justify-content-center ${styles["compare-result"]}`}
+                className={`d-flex flex-column justify-content-center align-items-center ${styles["compare-result"]}`}
               >
                 <button
                   className={styles["btn-compare"]}

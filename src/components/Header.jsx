@@ -1,9 +1,10 @@
 import "./Header.css";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Header({ onResetApp }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogoClick = (e) => {
     e.preventDefault(); // Always prevent default to handle navigation ourselves
@@ -48,10 +49,16 @@ function Header({ onResetApp }) {
           </Link>
 
           <div className="nav-links">
-            <Link to="/games" className="nav-link">
+            <Link
+              to="/games"
+              className={`nav-link ${location.pathname == "/games" ? "active" : ""}`}
+            >
               Trò chơi
             </Link>
-            <Link to="/features" className="nav-link">
+            <Link
+              to="/features"
+              className={`nav-link ${location.pathname == "/features" ? "active" : ""}`}
+            >
               Tính năng
             </Link>
           </div>

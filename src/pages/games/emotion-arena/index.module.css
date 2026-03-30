@@ -22,7 +22,7 @@
 }
 
 .btn-compare {
-  background: #fe0d0b;
+  background: #e60012;
   color: white;
   border: none;
   padding: 12px 25px;
@@ -37,6 +37,11 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
   z-index: 100000;
+  width: 50%;
+}
+
+.btn-compare:hover {
+  background: #c7000f;
 }
 
 .btn-compare:active {
@@ -51,7 +56,7 @@
 .counter {
   font-size: 3rem;
   font-weight: bold;
-  color: #064ef6;
+  color: #2563eb;
   text-align: center;
   counter-reset: num 0; /* Giá trị mặc định khi chưa nhấn */
 }

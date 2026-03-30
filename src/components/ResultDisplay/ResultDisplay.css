@@ -184,7 +184,7 @@ canvas[role="img"] {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: red;
+  background: #d40303;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,7 +242,7 @@ canvas[role="img"] {
   width: 100%;
   padding: 16px;
   margin: 0 auto 20px;
-  background: red;
+  background: #d40303;
   color: white;
   border: none;
   border-radius: 12px;
@@ -485,7 +485,7 @@ canvas[role="img"] {
 .loading-logo-placeholder {
   width: 24px;
   height: 24px;
-  background: red;
+  background: #d40303;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
