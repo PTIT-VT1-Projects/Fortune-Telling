@@ -32,7 +32,7 @@ function Features() {
           {/* Trò chơi 2 */}
           <div
             className="feature-card"
-            onClick={() => navigate("emotion-area")}
+            onClick={() => navigate("emotion-arena")}
           >
             <div className="feature-icon-container">
               <div className="feature-icon physiognomy-icon">

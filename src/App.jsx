@@ -11,6 +11,7 @@ import Features from "./pages/Features/Features";
 import Games from "./pages/Games";
 import Header from "./components/Header";
 import FaceReading from "./pages/games/face-reading/index";
+import EmotionArena from "./pages/games/emotion-arena";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Routes>
               <Route path="/games">
                 <Route path="face-reading" element={<FaceReading />}></Route>
-                <Route path="emotion-area" element={<FaceReading />}></Route>
+                <Route path="emotion-arena" element={<EmotionArena />}></Route>
                 <Route path="" index element={<Games />} />
               </Route>
               <Route path="/features" element={<Features />} />

@@ -1,6 +1,6 @@
 import "./ImageUploader.css";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import AnalysisProgress from "../AnalysisProgress/AnalysisProgress";
 import ImageService from "../../services/imageService";
@@ -59,10 +59,12 @@ const ImageUploader = ({ onImageSelect }) => {
 
       <div className="upload-container">
         <div className="upload-area">
-          <ImageSnapshot
-            isUsingCamera={isUsingCamera}
-            handleAfterSnapshot={handleAfterSnapshot}
-          />
+          {isUsingCamera && (
+            <ImageSnapshot
+              handleAfterSnapshot={handleAfterSnapshot}
+              element={<button className="take-camera">📸 Chụp ảnh</button>}
+            />
+          )}
 
           {!isUsingCamera && (
             <div onClick={handleUploadClick}>
