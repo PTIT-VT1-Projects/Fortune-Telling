@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Features from "./pages/features/Features";
+import Features from "./pages/features";
 import Games from "./pages/games";
 import Header from "./layouts/Header";
 import FaceReading from "./pages/games/face-reading/index";
