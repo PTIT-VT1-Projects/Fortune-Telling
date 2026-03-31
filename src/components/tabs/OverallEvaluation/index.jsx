@@ -1,6 +1,6 @@
 import styles from "./index.module.css";
 
-import React, { useRef } from "react";
+import { useRef, useState } from "react";
 import PrintArea from "../PrintArea/PrintArea";
 import ScoreMap from "../ScoreMap";
 import { getFeatureDetails } from "../features";
@@ -11,7 +11,10 @@ import { FiPrinter } from "react-icons/fi";
 
 function OverallEvaluationTab({ faceData, isLoading, image }) {
   const printRef = useRef();
-  const [isPrinting, setIsPrinting] = React.useState(false);
+  const [isPrinting, setIsPrinting] = useState(false);
+  const [compatibleLevel, _] = useState(
+    Math.floor(Math.random() * (100 - 80 + 1)) + 80,
+  );
 
   const { overallEvaluation, overallEvaluationScores } = faceData || {};
 
@@ -46,7 +49,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
 
   return (
     <div className="row">
-      <div className="">
+      <div className={styles["print-host"]}>
         <PrintArea
           ref={printRef}
           image={image}
@@ -77,7 +80,7 @@ function OverallEvaluationTab({ faceData, isLoading, image }) {
           <h4 className={"user-simple-info"}>
             Mức độ tương thích ngành Viễn thông:
           </h4>
-          <ProgressBar />
+          <ProgressBar compatibleLevel={compatibleLevel} />
         </div>
       </div>
 

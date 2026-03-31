@@ -136,6 +136,28 @@ canvas[role="img"] {
   }
 }
 
+.print-host {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 1100px; /* rất quan trọng: phải có size thật */
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@media print {
+  .print-host {
+    position: static;
+    left: auto;
+    top: auto;
+    width: auto;
+    visibility: visible;
+    pointer-events: auto;
+    overflow: visible;
+  }
+}
+
 @media print {
   /* Ép trình duyệt in các màu nền và đồ họa */
   * {

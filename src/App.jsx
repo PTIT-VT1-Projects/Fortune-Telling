@@ -7,11 +7,12 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Features from "./pages/Features/Features";
-import Games from "./pages/Games";
-import Header from "./components/Header";
+import Features from "./pages/features/Features";
+import Games from "./pages/games";
+import Header from "./layouts/Header";
 import FaceReading from "./pages/games/face-reading/index";
 import EmotionArena from "./pages/games/emotion-arena";
+import Footer from "./layouts/Footer";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             </Routes>
           </div>
         </main>
+        <Footer />
       </div>
     </Router>
   );

@@ -1,6 +1,8 @@
 import React from "react";
 import RadarChart from "../RadarChart";
 import ScoreMap from "../ScoreMap";
+import logoPtit from "../../../assets/print/ptit.png";
+import vt1 from "../../../assets/print/vt1.png";
 
 const PrintArea = React.forwardRef(
   ({ age, image: avatar, overallEvaluation, overallEvaluationScores }, ref) => {
@@ -11,14 +13,14 @@ const PrintArea = React.forwardRef(
       <div ref={ref} className="print-container">
         {/* Header Section */}
         <div className="d-flex justify-content-between align-items-center px-4 mt-4">
-          <img src="/images/ptit.png" alt="Logo PTIT" width={80} height={80} />
+          <img src={logoPtit} alt="Logo PTIT" width={80} height={80} />
           <div className="text-center">
             <p className="fw-bold m-0 uppercase">
               Học viện Công nghệ Bưu chính Viễn thông
             </p>
             <p className="m-0">Khoa Viễn thông 1</p>
           </div>
-          <img src="/images/vt1.png" alt="Logo VT1" width={80} height={80} />
+          <img src={vt1} alt="Logo VT1" width={80} height={80} />
         </div>
 
         {/* Profile & Radar Chart Section */}
@@ -45,14 +47,14 @@ const PrintArea = React.forwardRef(
         <div className="row mt-4 mx-3 align-items-center">
           {/* Cột hiển thị cho trường hợp ODD (ẩn hàng chẵn theo CSS của bạn) */}
           <div className="col-6">
-            <div class="d-flex flex-column" style={{ gap: "12px" }}>
+            <div className="d-flex flex-column" style={{ gap: "12px" }}>
               <ScoreMap {...scoreProps} number={1} />
             </div>
           </div>
 
           {/* Cột hiển thị cho trường hợp EVEN (ẩn hàng lẻ theo CSS của bạn) */}
           <div className="col-6">
-            <div class="d-flex flex-column" style={{ gap: "12px" }}>
+            <div className="d-flex flex-column" style={{ gap: "12px" }}>
               <ScoreMap {...scoreProps} number={0} />
             </div>
           </div>

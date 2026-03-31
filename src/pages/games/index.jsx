@@ -16,7 +16,7 @@ function Features() {
               <div className="feature-icon-container">
                 <div className="feature-icon overview-icon">
                   <img
-                    src="/images/overview.svg"
+                    src="/images/face-reader.svg"
                     alt="Tổng quan"
                     style={{
                       width: "100%",
@@ -43,7 +43,7 @@ function Features() {
               <div className="feature-icon-container">
                 <div className="feature-icon physiognomy-icon">
                   <img
-                    src="/images/physiognomy.svg"
+                    src="/images/face-arena.svg"
                     alt="Tướng số học"
                     style={{
                       width: "100%",
