@@ -38,6 +38,9 @@
   margin-top: 10px;
   z-index: 100000;
   width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-compare:hover {

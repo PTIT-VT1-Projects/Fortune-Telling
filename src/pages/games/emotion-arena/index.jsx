@@ -2,6 +2,8 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./index.module.css";
 import imageUtil from "../../../utils/imageUtil";
 import imageCompareService from "../../../services/imageCompareService";
+import { IoIosRefresh } from "react-icons/io";
+import { MdCompareArrows } from "react-icons/md";
 
 const EmotionArena = () => {
   const [selectedMeme, setSelectedMeme] = useState(imageUtil.getRandomImage());
@@ -132,7 +134,20 @@ const EmotionArena = () => {
                   className={styles["btn-compare"]}
                   onClick={!isRefreshed ? compareImage : resetImage}
                 >
-                  {!isRefreshed ? "So sánh" : "Tải lại"}
+                  {!isRefreshed ? (
+                    <>
+                      <span>
+                        <MdCompareArrows />
+                      </span>
+                      &nbsp;
+                      <span>So sánh</span>
+                    </>
+                  ) : (
+                    <>
+                      <IoIosRefresh /> &nbsp;
+                      <span>Tải lại</span>
+                    </>
+                  )}
                 </button>
                 <h2 className={`mt-2 ${styles["counter"]}`}>
                   {comparedImageAccuracy}%

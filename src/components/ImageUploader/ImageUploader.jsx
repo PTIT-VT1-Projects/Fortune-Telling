@@ -1,10 +1,11 @@
-import "./ImageUploader.css";
+import styles from "./ImageUploader.module.css";
 
 import { useCallback, useRef, useState } from "react";
 
 import AnalysisProgress from "../AnalysisProgress/AnalysisProgress";
 import ImageService from "../../services/imageService";
 import ImageSnapshot from "../ImageSnapshot/index";
+import { CiCamera } from "react-icons/ci";
 
 const ImageUploader = ({ onImageSelect }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -48,27 +49,31 @@ const ImageUploader = ({ onImageSelect }) => {
   }
 
   return (
-    <div className="image-uploader">
-      <div className="hero-section">
-        <div className="hero-content">
-          <h1 className="hero-title">Khám phá khuôn mặt</h1>
-          <p className="hero-subtitle">Tìm hiểu bản thân, vén màn số phận</p>
-          <div className="hero-decoration"></div>
+    <div className={"image-uploader"}>
+      <div className={"hero-section"}>
+        <div className={"hero-content"}>
+          <h1 className={"hero-title"}>Khám phá khuôn mặt</h1>
+          <p className={"hero-subtitle"}>Tìm hiểu bản thân, vén màn số phận</p>
+          <div className={"hero-decoration"}></div>
         </div>
       </div>
 
-      <div className="upload-container">
-        <div className="upload-area">
+      <div className={styles["upload-container"]}>
+        <div className={styles["upload-area"]}>
           {isUsingCamera && (
             <ImageSnapshot
               handleAfterSnapshot={handleAfterSnapshot}
-              element={<button className="take-camera">📸 Chụp ảnh</button>}
+              element={
+                <button className={styles["take-camera"]}>
+                  <CiCamera /> &nbsp; Chụp ảnh
+                </button>
+              }
             />
           )}
 
           {!isUsingCamera && (
             <div onClick={handleUploadClick}>
-              <div className="upload-icon">
+              <div className={styles["upload-icon"]}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="48"
@@ -85,18 +90,22 @@ const ImageUploader = ({ onImageSelect }) => {
                   <line x1="12" y1="3" x2="12" y2="15"></line>
                 </svg>
               </div>
-              <h3 className="upload-title">Kéo thả hoặc tải ảnh chân dung</h3>
+
+              <h3 className={styles["upload-title"]}>
+                Kéo thả hoặc tải ảnh chân dung
+              </h3>
+
               <input
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
                 accept="image/*"
-                className="file-input"
+                className={styles["file-input"]}
               />
             </div>
           )}
         </div>
-        {/* Manual upload */}
+
         {isUsingCamera && (
           <p
             style={{ cursor: "pointer" }}
@@ -105,6 +114,7 @@ const ImageUploader = ({ onImageSelect }) => {
             Không quay được camera? Ấn vào đây để tải ảnh lên
           </p>
         )}
+
         {!isUsingCamera && (
           <p
             style={{ cursor: "pointer" }}

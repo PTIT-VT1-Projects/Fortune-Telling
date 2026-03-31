@@ -1,7 +1,6 @@
 import React from "react";
 import RadarChart from "../RadarChart";
 import ScoreMap from "../ScoreMap";
-import "./PrintArea.css"; // Nếu dùng CSS thuần, import trực tiếp như này
 
 const PrintArea = React.forwardRef(
   ({ age, image: avatar, overallEvaluation, overallEvaluationScores }, ref) => {
@@ -45,13 +44,17 @@ const PrintArea = React.forwardRef(
         {/* Score Maps Section - Logic Odd/Even */}
         <div className="row mt-4 mx-3 align-items-center">
           {/* Cột hiển thị cho trường hợp ODD (ẩn hàng chẵn theo CSS của bạn) */}
-          <div className="col-6 odd">
-            <ScoreMap {...scoreProps} />
+          <div className="col-6">
+            <div class="d-flex flex-column" style={{ gap: "12px" }}>
+              <ScoreMap {...scoreProps} number={1} />
+            </div>
           </div>
 
           {/* Cột hiển thị cho trường hợp EVEN (ẩn hàng lẻ theo CSS của bạn) */}
-          <div className="col-6 even">
-            <ScoreMap {...scoreProps} />
+          <div className="col-6">
+            <div class="d-flex flex-column" style={{ gap: "12px" }}>
+              <ScoreMap {...scoreProps} number={0} />
+            </div>
           </div>
         </div>
       </div>

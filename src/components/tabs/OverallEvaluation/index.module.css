@@ -26,44 +26,6 @@
   box-sizing: border-box;
 }
 
-.feature-row {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 8px;
-  width: 100%;
-  box-sizing: border-box;
-  background: rgb(248, 249, 250);
-  border-radius: 12px;
-  padding: 1rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(229, 231, 235);
-  border-image: initial;
-  transition: 0.3s;
-  animation: 0.5s ease-out 0s 1 normal none running fadeIn;
-  margin-bottom: 12px;
-}
-
-.feature-name {
-  font-weight: 600;
-  font-size: 1rem;
-  color: red;
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.feature-description {
-  margin: 0.5rem 0 0;
-  line-height: 1.5;
-  color: #333;
-  font-size: 0.8rem;
-}
-
-.feature-score {
-  display: flex;
-  align-items: center;
-}
-
 .score-badge {
   background: #d40303;
   color: white;
@@ -188,4 +150,22 @@ canvas[role="img"] {
     width: 100% !important;
     height: 100% !important;
   }
+}
+
+.print {
+  background: #d40303;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

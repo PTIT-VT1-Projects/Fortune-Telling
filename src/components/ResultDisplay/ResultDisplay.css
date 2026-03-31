@@ -1089,6 +1089,7 @@ canvas[role="img"] {
 .tab-content {
   background-color: white;
   padding: 12px;
+  height: 100%;
 }
 
 .invalid-image-message {
