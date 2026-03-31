@@ -1,4 +1,4 @@
-import "./Features.css";
+import "./index.css";
 
 function Features() {
   return (
