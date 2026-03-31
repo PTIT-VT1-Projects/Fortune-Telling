@@ -178,6 +178,10 @@ html {
   box-shadow: none;
 }
 
+.main-content {
+  flex: 1;
+}
+
 /* Progress container */
 .progress-container {
   width: 100%;

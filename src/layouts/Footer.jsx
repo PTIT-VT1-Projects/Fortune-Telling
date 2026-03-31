@@ -1,6 +1,9 @@
 const Footer = () => {
   return (
-    <footer class="text-white pt-4 pb-4" style={{ background: "#e60012" }}>
+    <footer
+      class="text-white pt-4 pb-4 footer"
+      style={{ background: "#e60012" }}
+    >
       <div class="container text-md-start">
         <div class="row align-items-center">
           <div class="col-md-7 col-lg-8">
