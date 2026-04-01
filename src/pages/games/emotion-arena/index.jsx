@@ -4,6 +4,9 @@ import imageUtil from "../../../utils/imageUtil";
 import imageCompareService from "../../../services/imageCompareService";
 import { IoIosRefresh } from "react-icons/io";
 import { MdCompareArrows } from "react-icons/md";
+import dbUtil from "../../../services/indexDBService";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Button from "react-bootstrap/Button";
 
 const EmotionArena = () => {
   const [selectedMeme, setSelectedMeme] = useState(imageUtil.getRandomImage());
@@ -13,6 +16,7 @@ const EmotionArena = () => {
   const [comparedImageAccuracy, setComparedImageAccuracy] = useState(0);
   const [isRefreshed, setIsRefreshed] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [topMemeScores, setTopMemeScores] = useState([]);
 
   // Compare image based on 2 base64 image
   const compareImage = async () => {
@@ -43,18 +47,26 @@ const EmotionArena = () => {
       const duration = 6000;
 
       const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-
-      const step = (now) => {
+      const step = async (now) => {
         const t = Math.min((now - startTime) / duration, 1);
-        setComparedImageAccuracy(
-          Math.round(parseInt(result.similarity_percentage) * easeOut(t)),
+        const resultScore = Math.round(
+          parseInt(result.similarity_percentage) * easeOut(t),
         );
-        if (t < 1) requestAnimationFrame(step);
+        setComparedImageAccuracy(resultScore);
+        if (t < 1) {
+          requestAnimationFrame(step);
+        } else {
+          await dbUtil.addItem({
+            id: Date.now(),
+            image: myImageBase64,
+            accuracy: resultScore,
+          });
+        }
       };
-
+      requestAnimationFrame(step);
+      //Reset to initial state
       setCapturedImage(myImageBase64);
       setIsRefreshed(true);
-      requestAnimationFrame(step);
     } catch (err) {
       console.log("Error on compared image: " + err);
     }
@@ -90,6 +102,18 @@ const EmotionArena = () => {
       }
     };
   }, [capturedImage]);
+
+  // Reload indexDB to update leaderboard immediately after new score is added
+  useEffect(() => {
+    dbUtil.getItemsSortedByAccuracyDesc(10).then((items) => {
+      setTopMemeScores(items);
+    });
+  });
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -164,6 +188,46 @@ const EmotionArena = () => {
                 />
               </div>
             </div>
+
+            {/* Leaderboard */}
+            <Button variant="primary" onClick={handleShow}>
+              Bảng xếp hạng
+            </Button>
+            <Offcanvas show={show} onHide={handleClose}>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <table className="table mt-4 table-striped">
+                  <thead>
+                    <tr>
+                      <th>Hạng</th>
+                      <th>Ảnh</th>
+                      <th>Độ chính xác</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    {topMemeScores.map((item, index) => (
+                      <tr key={item.id}>
+                        <td>{index + 1}</td>
+                        <td>
+                          <img
+                            src={item.image}
+                            alt={`Meme ${index + 1}`}
+                            style={{
+                              width: "120px",
+                              height: "120px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </td>
+                        <td>{item.accuracy}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Offcanvas.Body>
+            </Offcanvas>
           </div>
         </div>
       </div>
@@ -172,3 +236,34 @@ const EmotionArena = () => {
 };
 
 export default EmotionArena;
+
+{
+  /* <table className="table mt-4 table-striped">
+  <thead>
+    <tr>
+      <th>Hạng</th>
+      <th>Ảnh</th>
+      <th>Độ chính xác</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {topMemeScores.map((item, index) => (
+      <tr key={item.id}>
+        <td>{index + 1}</td>
+        <td>
+          <img
+            src={item.image}
+            alt={`Meme ${index + 1}`}
+            style={{
+              width: "120px",
+              height: "120px",
+              objectFit: "cover",
+            }}
+          />
+        </td>
+        <td>{item.accuracy}%</td>
+      </tr>
+    ))}
+  </tbody>
+</table>; */
+}
