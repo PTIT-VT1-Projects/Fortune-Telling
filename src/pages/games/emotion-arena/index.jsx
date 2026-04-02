@@ -6,7 +6,7 @@ import { IoIosRefresh } from "react-icons/io";
 import { MdCompareArrows } from "react-icons/md";
 import dbUtil from "../../../services/indexDBService";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import Button from "react-bootstrap/Button";
+import { CiViewTable } from "react-icons/ci";
 
 const EmotionArena = () => {
   const [selectedMeme, setSelectedMeme] = useState(imageUtil.getRandomImage());
@@ -155,7 +155,7 @@ const EmotionArena = () => {
                 className={`d-flex flex-column justify-content-center align-items-center ${styles["compare-result"]}`}
               >
                 <button
-                  className={styles["btn-compare"]}
+                  className={`w-100 ${styles["btn-compare"]}`}
                   onClick={!isRefreshed ? compareImage : resetImage}
                 >
                   {!isRefreshed ? (
@@ -176,6 +176,14 @@ const EmotionArena = () => {
                 <h2 className={`mt-2 ${styles["counter"]}`}>
                   {comparedImageAccuracy}%
                 </h2>
+
+                {/* leaderboard */}
+                <button
+                  onClick={handleShow}
+                  className={`w-100 ${styles["btn-compare"]}`}
+                >
+                  <CiViewTable /> &nbsp; Bảng xếp hạng
+                </button>
               </div>
             </div>
             <div className="col-md-4">
@@ -190,12 +198,12 @@ const EmotionArena = () => {
             </div>
 
             {/* Leaderboard */}
-            <Button variant="primary" onClick={handleShow}>
-              Bảng xếp hạng
-            </Button>
+
             <Offcanvas show={show} onHide={handleClose}>
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                <Offcanvas.Title className={styles["leaderboard-title"]}>
+                  Bảng xếp hạng biểu cảm troll nhất
+                </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <table className="table mt-4 table-striped">
@@ -206,24 +214,32 @@ const EmotionArena = () => {
                       <th>Độ chính xác</th>
                     </tr>
                   </thead>
-                  <tbody class="table-group-divider">
-                    {topMemeScores.map((item, index) => (
-                      <tr key={item.id}>
-                        <td>{index + 1}</td>
-                        <td>
-                          <img
-                            src={item.image}
-                            alt={`Meme ${index + 1}`}
-                            style={{
-                              width: "120px",
-                              height: "120px",
-                              objectFit: "cover",
-                            }}
-                          />
+                  <tbody className="table-group-divider">
+                    {topMemeScores.length == 0 ? (
+                      <tr>
+                        <td colSpan="3" className="text-center">
+                          Chưa có dữ liệu
                         </td>
-                        <td>{item.accuracy}%</td>
                       </tr>
-                    ))}
+                    ) : (
+                      topMemeScores.map((item, index) => (
+                        <tr key={item.id}>
+                          <td>{index + 1}</td>
+                          <td>
+                            <img
+                              src={item.image}
+                              alt={`Meme ${index + 1}`}
+                              style={{
+                                width: "120px",
+                                height: "120px",
+                                objectFit: "cover",
+                              }}
+                            />
+                          </td>
+                          <td>{item.accuracy}%</td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </Offcanvas.Body>
@@ -236,34 +252,3 @@ const EmotionArena = () => {
 };
 
 export default EmotionArena;
-
-{
-  /* <table className="table mt-4 table-striped">
-  <thead>
-    <tr>
-      <th>Hạng</th>
-      <th>Ảnh</th>
-      <th>Độ chính xác</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    {topMemeScores.map((item, index) => (
-      <tr key={item.id}>
-        <td>{index + 1}</td>
-        <td>
-          <img
-            src={item.image}
-            alt={`Meme ${index + 1}`}
-            style={{
-              width: "120px",
-              height: "120px",
-              objectFit: "cover",
-            }}
-          />
-        </td>
-        <td>{item.accuracy}%</td>
-      </tr>
-    ))}
-  </tbody>
-</table>; */
-}
