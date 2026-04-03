@@ -1,0 +1,10 @@
+.social-area {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .social-area {
+    flex-direction: column;
+    align-items: center;
+  }
+}

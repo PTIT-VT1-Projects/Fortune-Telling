@@ -71,7 +71,6 @@ const EmotionArena = () => {
           setTopMemeScores(items);
 
           setIsLeaderboardOpen(true); // hiện nút sau khi animation xong
-          setShow(true); // nếu muốn tự mở leaderboard luôn
         }
       };
 

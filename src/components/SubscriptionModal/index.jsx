@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import styles from "./index.module.css";
 
 const SubscriptionModal = ({ show, handleClose }) => {
   return (
@@ -16,7 +17,7 @@ const SubscriptionModal = ({ show, handleClose }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="d-flex">
+        <div className={styles["social-area"]}>
           <div className="d-flex flex-column justify-content-center align-items-center">
             <img
               src="/images/facebook-sub.png"
