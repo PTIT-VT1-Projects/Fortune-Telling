@@ -7,6 +7,7 @@ import { MdCompareArrows } from "react-icons/md";
 import dbUtil from "../../../services/indexDBService";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { CiViewTable } from "react-icons/ci";
+import SubscriptionModal from "../../../components/SubscriptionModal";
 
 const EmotionArena = () => {
   const [selectedMeme, setSelectedMeme] = useState(imageUtil.getRandomImage());
@@ -17,7 +18,12 @@ const EmotionArena = () => {
   const [isRefreshed, setIsRefreshed] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
   const [topMemeScores, setTopMemeScores] = useState([]);
+  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [subscriptionModalOpened, setSubscriptionModalOpened] = useState(false);
 
+  const handleClose = () => setShowLeaderboard(false);
+  const handleShow = () => setShowLeaderboard(true);
   // Compare image based on 2 base64 image
   const compareImage = async () => {
     const canvas = canvasRef.current;
@@ -61,12 +67,17 @@ const EmotionArena = () => {
             image: myImageBase64,
             accuracy: resultScore,
           });
+          const items = await dbUtil.getItemsSortedByAccuracyDesc(10);
+          setTopMemeScores(items);
+
+          setIsLeaderboardOpen(true); // hiện nút sau khi animation xong
+          setShow(true); // nếu muốn tự mở leaderboard luôn
         }
       };
-      requestAnimationFrame(step);
-      //Reset to initial state
+
       setCapturedImage(myImageBase64);
       setIsRefreshed(true);
+      requestAnimationFrame(step);
     } catch (err) {
       console.log("Error on compared image: " + err);
     }
@@ -78,12 +89,12 @@ const EmotionArena = () => {
     setSelectedMeme(imageUtil.getRandomImage());
     setComparedImageAccuracy(0);
     setCapturedImage(null);
+    setIsLeaderboardOpen(false);
   };
 
   // Streaming video
   useEffect(() => {
     let stream;
-
     navigator.mediaDevices
       .getUserMedia({ video: true })
       .then((mediaStream) => {
@@ -103,17 +114,11 @@ const EmotionArena = () => {
     };
   }, [capturedImage]);
 
-  // Reload indexDB to update leaderboard immediately after new score is added
   useEffect(() => {
     dbUtil.getItemsSortedByAccuracyDesc(10).then((items) => {
       setTopMemeScores(items);
     });
-  });
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  }, []);
 
   return (
     <>
@@ -181,9 +186,29 @@ const EmotionArena = () => {
                 <button
                   onClick={handleShow}
                   className={`w-100 ${styles["btn-compare"]}`}
+                  style={{ visibility: isLeaderboardOpen ? false : "hidden" }}
                 >
                   <CiViewTable /> &nbsp; Bảng xếp hạng
                 </button>
+                {/* Link theo dõi */}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSubscriptionModalOpened(true);
+                  }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2"
+                  style={{ visibility: isLeaderboardOpen ? false : "hidden" }}
+                >
+                  Theo dõi khoa Viễn thông
+                </a>
+                {/* Modal subscribe  */}
+                <SubscriptionModal
+                  show={subscriptionModalOpened}
+                  handleClose={() => setSubscriptionModalOpened(false)}
+                />
               </div>
             </div>
             <div className="col-md-4">
@@ -199,10 +224,10 @@ const EmotionArena = () => {
 
             {/* Leaderboard */}
 
-            <Offcanvas show={show} onHide={handleClose}>
+            <Offcanvas show={showLeaderboard} onHide={handleClose}>
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title className={styles["leaderboard-title"]}>
-                  Bảng xếp hạng biểu cảm troll nhất
+                  Bảng xếp hạng biểu cảm "troll" nhất
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
