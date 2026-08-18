@@ -6,10 +6,10 @@ const JobPrediction = () => {
   const [portraitImage, setPortraitImage] = React.useState(null);
 
   const handleImageSelect = async (file) => {
-    if (!file) return;
-    const portraitAfterFiveYears =
-      await jobPredictionService.createPortraitAfterFiveYears(file);
-    setPortraitImage(portraitAfterFiveYears);
+    // if (!file) return;
+    // const portraitAfterFiveYears =
+    //   await jobPredictionService.createPortraitAfterFiveYears(file);
+    // setPortraitImage(portraitAfterFiveYears);
   };
 
   return (
@@ -25,11 +25,22 @@ const JobPrediction = () => {
       </div>
 
       {portraitImage ? (
-        <img src={portraitImage} alt="Portrait After Five Years" />
+        <div className="text-center">
+          <img
+            src={portraitImage}
+            alt="Portrait After Five Years"
+            width={450}
+            height={450}
+          />
+        </div>
       ) : (
         <ImageUploader
           onImageSelect={handleImageSelect}
-          previewComponent={<img />}
+          render={({ src }) => (
+            <div className="text-center">
+              <img src={src} />
+            </div>
+          )}
         />
       )}
     </>

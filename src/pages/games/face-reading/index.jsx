@@ -75,7 +75,9 @@ const FaceReading = () => {
           </div>
           <ImageUploader
             onImageSelect={handleImageSelect}
-            previewComponent={<AnalysisProgress />}
+            render={({ image, onRetry }) => (
+              <AnalysisProgress image={image} onRetry={onRetry} />
+            )}
           />
         </div>
       ) : showResult ? (

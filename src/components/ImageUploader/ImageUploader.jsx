@@ -7,7 +7,7 @@ import ImageService from "../../services/imageService";
 import ImageSnapshot from "../ImageSnapshot/index";
 import { CiCamera } from "react-icons/ci";
 
-const ImageUploader = ({ onImageSelect, previewComponent }) => {
+const ImageUploader = ({ onImageSelect, render }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
   const [isUsingCamera, setIsUsingCamera] = useState(true);
@@ -46,8 +46,8 @@ const ImageUploader = ({ onImageSelect, previewComponent }) => {
   // If image is selected, show the analysis in progress UI
   if (previewUrl) {
     // Nếu có previewComponent được truyền từ ngoài vào, dùng nó (kèm props image + onRetry)
-    if (previewComponent) {
-      return cloneElement(previewComponent, {
+    if (render) {
+      return render({
         image: previewUrl,
         src: previewUrl,
         onRetry: handleRetry,
