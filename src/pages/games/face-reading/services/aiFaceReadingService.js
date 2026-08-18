@@ -1,6 +1,6 @@
-import config from "../config";
+import config from "../../../../config";
 
-class AiService {
+class AIFaceReadingService {
   static async validatePortrait(imageBase64, mimeType) {
     try {
       // Create abort controller for timeout
@@ -182,4 +182,4 @@ class AiService {
   }
 }
 
-export default AiService;
+export default AIFaceReadingService;

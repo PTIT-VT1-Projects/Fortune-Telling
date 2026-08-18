@@ -13,6 +13,7 @@ import Header from "./layouts/Header";
 import FaceReading from "./pages/games/face-reading/index";
 import EmotionArena from "./pages/games/emotion-arena";
 import Footer from "./layouts/Footer";
+import JobPrediction from "./pages/games/job-prediction";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/games">
                 <Route path="face-reading" element={<FaceReading />}></Route>
                 <Route path="emotion-arena" element={<EmotionArena />}></Route>
+                <Route path="job-prediction" element={<JobPrediction />} />
                 <Route path="" index element={<Games />} />
               </Route>
               <Route path="/features" element={<Features />} />

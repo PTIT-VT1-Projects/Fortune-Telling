@@ -1,35 +1,24 @@
 import { GoogleGenAI } from "@google/genai";
-import config from "../config";
+import config from "../../../../config";
+import imageService from "../../../../api/imageService";
 
 const ai = new GoogleGenAI({
   apiKey: config.api.key,
 });
 
-function blobToBase64(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const result = reader.result;
-      resolve(String(result).split(",")[1]);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
-
-async function imageToImageRaw(imageBlob) {
+async function createPortraitAfterFiveYears(image) {
   try {
-    const base64Image = await blobToBase64(imageBlob);
+    const base64Image = await imageService.blobToBase64(image);
 
     const response = await ai.models.generateContent({
       model: "gemini-3.1-flash-image-preview",
       contents: [
         {
-          text: "make this person look 5 years older, highly realistic, wrinkles",
+          text: "make this person look 4 years older, highly realistic, wrinkles",
         },
         {
           inlineData: {
-            mimeType: imageBlob.type || "image/png",
+            mimeType: image.type || "image/png",
             data: base64Image,
           },
         },
@@ -53,4 +42,6 @@ async function imageToImageRaw(imageBlob) {
   }
 }
 
-export default { imageToImageRaw };
+const jobPredictionService = { createPortraitAfterFiveYears };
+
+export default jobPredictionService;

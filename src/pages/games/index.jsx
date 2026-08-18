@@ -7,9 +7,10 @@ function Features() {
   return (
     <div className="page-container features-page">
       <div className="page-content">
-        <div className="row">
+        <div className="features-grid">
+          {/* Face reader */}
           <div
-            className="col-md-6 mt-2"
+            className="feature-card"
             onClick={() => navigate("face-reading")}
           >
             <div className={styles["feature-card"]}>
@@ -35,8 +36,10 @@ function Features() {
               </div>
             </div>
           </div>
+
+          {/* Emotion arena */}
           <div
-            className="col-md-6 mt-2"
+            className="feature-card"
             onClick={() => navigate("emotion-arena")}
           >
             <div className={styles["feature-card"]}>
@@ -59,6 +62,34 @@ function Features() {
                   Dùng camera chụp khuôn mặt rồi so với ảnh mẫu để xem bạn bắt
                   chước biểu cảm đỉnh cỡ nào. Giống thì được điểm, lệch thì được
                   tiếng cười.
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Job prediction */}
+          <div
+            className="feature-card"
+            onClick={() => navigate("job-prediction")}
+          >
+            <div className={styles["feature-card"]}>
+              <div className="feature-icon-container">
+                <div className="feature-icon overview-icon">
+                  <img
+                    src="/images/face-reader.svg"
+                    alt="Tổng quan"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              </div>
+              <div className={styles["feature-text"]}>
+                <h2 className="feature-title">Dự đoán nghề nghiệp</h2>
+                <p>
+                  Chụp ảnh bằng camera để AI đoán tuổi, soi tính cách và chấm
+                  điểm gương mặt. Vui là chính, chính xác là chuyện tính sau.
                 </p>
               </div>
             </div>

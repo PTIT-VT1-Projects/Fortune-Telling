@@ -63,7 +63,21 @@ const FaceReading = () => {
   return (
     <>
       {!previewUrl ? (
-        <ImageUploader onImageSelect={handleImageSelect} />
+        <div className={"image-uploader"}>
+          <div className={"hero-section"}>
+            <div className={"hero-content"}>
+              <h1 className={"hero-title"}>Khám phá khuôn mặt</h1>
+              <p className={"hero-subtitle"}>
+                Tìm hiểu bản thân, vén màn số phận
+              </p>
+              <div className={"hero-decoration"}></div>
+            </div>
+          </div>
+          <ImageUploader
+            onImageSelect={handleImageSelect}
+            previewComponent={<AnalysisProgress />}
+          />
+        </div>
       ) : showResult ? (
         <ResultDisplay
           image={previewUrl}

@@ -2,9 +2,9 @@ import "./AnalysisProgress.css";
 
 import React, { useEffect, useRef, useState } from "react";
 
-import AiService from "../../api/aiService";
-import ApiService from "../../api/apiService";
 import ImageService from "../../services/imageService";
+import AIFaceReadingService from "../../pages/games/face-reading/services/aiFaceReadingService";
+import ApiFaceReadingService from "../../pages/games/face-reading/services/apiFaceReadingService";
 
 const AnalysisProgress = ({ file, image, onRetry, onAnalysisComplete }) => {
   const [statusText, setStatusText] = useState("Đang kiểm tra ảnh");
@@ -112,7 +112,7 @@ const AnalysisProgress = ({ file, image, onRetry, onAnalysisComplete }) => {
         const base64Image = await base64Promise;
 
         try {
-          const aiValidation = await AiService.validatePortrait(
+          const aiValidation = await AIFaceReadingService.validatePortrait(
             base64Image,
             file.type,
           );
@@ -162,7 +162,7 @@ const AnalysisProgress = ({ file, image, onRetry, onAnalysisComplete }) => {
 
           while (retryAttempts <= maxApiRetries) {
             try {
-              apiResult = await ApiService.analyzeFace(base64Image);
+              apiResult = await ApiFaceReadingService.analyzeFace(base64Image);
               break;
             } catch (apiError) {
               retryAttempts++;

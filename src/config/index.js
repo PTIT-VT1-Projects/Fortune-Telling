@@ -6,6 +6,8 @@ const config = {
     url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent",
   },
 
+  deepseek: {},
+
   imageGenerator: {
     key: import.meta.env.VITE_HUGGING_FACE_INTERFERENCE,
   },

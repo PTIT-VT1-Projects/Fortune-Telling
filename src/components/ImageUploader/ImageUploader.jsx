@@ -1,13 +1,13 @@
 import styles from "./ImageUploader.module.css";
 
-import { useCallback, useRef, useState } from "react";
+import { cloneElement, useCallback, useRef, useState } from "react";
 
 import AnalysisProgress from "../AnalysisProgress/AnalysisProgress";
 import ImageService from "../../services/imageService";
 import ImageSnapshot from "../ImageSnapshot/index";
 import { CiCamera } from "react-icons/ci";
 
-const ImageUploader = ({ onImageSelect }) => {
+const ImageUploader = ({ onImageSelect, previewComponent }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
   const [isUsingCamera, setIsUsingCamera] = useState(true);
@@ -45,19 +45,21 @@ const ImageUploader = ({ onImageSelect }) => {
 
   // If image is selected, show the analysis in progress UI
   if (previewUrl) {
-    return <AnalysisProgress image={previewUrl} onRetry={handleRetry} />;
+    // Nếu có previewComponent được truyền từ ngoài vào, dùng nó (kèm props image + onRetry)
+    if (previewComponent) {
+      return cloneElement(previewComponent, {
+        image: previewUrl,
+        src: previewUrl,
+        onRetry: handleRetry,
+      });
+    }
+
+    // Fallback mặc định
+    return <AnalysisProgress src={previewUrl} onRetry={handleRetry} />;
   }
 
   return (
-    <div className={"image-uploader"}>
-      <div className={"hero-section"}>
-        <div className={"hero-content"}>
-          <h1 className={"hero-title"}>Khám phá khuôn mặt</h1>
-          <p className={"hero-subtitle"}>Tìm hiểu bản thân, vén màn số phận</p>
-          <div className={"hero-decoration"}></div>
-        </div>
-      </div>
-
+    <>
       <div className={styles["upload-container"]}>
         <div className={styles["upload-area"]}>
           {isUsingCamera && (
@@ -105,9 +107,11 @@ const ImageUploader = ({ onImageSelect }) => {
             </div>
           )}
         </div>
-
+      </div>
+      <div className="text-center">
         {isUsingCamera && (
           <p
+            className="mt-2"
             style={{ cursor: "pointer" }}
             onClick={() => setIsUsingCamera(false)}
           >
@@ -124,7 +128,7 @@ const ImageUploader = ({ onImageSelect }) => {
           </p>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

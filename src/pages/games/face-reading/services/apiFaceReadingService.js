@@ -1,9 +1,8 @@
-import config from "../config";
-
+import config from "../../../../config";
 /**
  * Service for handling API calls to the facial analysis service
  */
-class ApiService {
+class ApiFaceReadingService {
   /**
    * Analyzes a facial image using the Gemini API
    * @param {string} base64Image - Base64 encoded image data
@@ -531,4 +530,4 @@ class ApiService {
   }
 }
 
-export default ApiService;
+export default ApiFaceReadingService;
