@@ -48,7 +48,7 @@ const ImageSnapshot = ({ handleAfterSnapshot, element }) => {
         ref={videoRef}
         autoPlay
         playsInline
-        style={{ width: "100%", maxWidth: 250 }}
+        style={{ width: "100%", maxWidth: 400 }}
       />
 
       {element ? (

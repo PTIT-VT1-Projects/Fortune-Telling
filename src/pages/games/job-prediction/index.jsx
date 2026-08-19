@@ -5,11 +5,19 @@ import AgingTransition from "./components/AgingTransition";
 
 import jobPredictionService from "./services/jobPredictionService";
 import imageService from "../../../api/imageService";
+import ScoreStamp from "./components/ScoreStamp";
+import HTMLFlipBook from "react-pageflip";
+import "./index.css";
+
+const randomMath = () => {
+  return 3;
+};
 
 const JobPrediction = () => {
   const [file, setFile] = React.useState(null);
   const [portraitImage, setPortraitImage] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const flipBookRef = React.useRef(null);
 
   const setOriginalImage = async (selectedFile) => {
     if (!selectedFile) return;
@@ -145,14 +153,46 @@ const JobPrediction = () => {
         </div>
       )}
 
+      {file && portraitImage && (
+        <HTMLFlipBook
+          ref={flipBookRef}
+          width={500}
+          height={500}
+          size="fixed"
+          drawShadow={true}
+          showCover={true}
+          flippingTime={1200}
+          onInit={() => {
+            setTimeout(() => {
+              flipBookRef.current?.pageFlip()?.flipNext();
+            }, 300);
+          }}
+        >
+          <div className="page page-left">
+            <ScoreStamp score={randomMath()} />
+          </div>
+
+          <div className="page page-right">
+            <AgingTransition
+              fromImage={URL.createObjectURL(file)}
+              toImage={portraitImage}
+              width={500}
+              height={500}
+              duration={5000}
+              autoPlay
+            />
+          </div>
+        </HTMLFlipBook>
+      )}
+
       {/* Có đủ 2 ảnh -> chạy transition */}
       {file && portraitImage && (
         <div className="text-center">
           <AgingTransition
             fromImage={URL.createObjectURL(file)}
             toImage={portraitImage}
-            width={450}
-            height={450}
+            width={500}
+            height={500}
             duration={5000}
             autoPlay
           />
