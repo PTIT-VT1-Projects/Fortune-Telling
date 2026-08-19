@@ -14,7 +14,8 @@ async function createPortraitAfterFiveYears(image) {
       model: "gemini-3.1-flash-image-preview",
       contents: [
         {
-          text: "make this person look 4 years older, highly realistic, wrinkles",
+          text: "make this person look 4 years older, only take the face and put in a job in telecommunication or data engineering field \
+          with name of that field, without true name",
         },
         {
           inlineData: {
