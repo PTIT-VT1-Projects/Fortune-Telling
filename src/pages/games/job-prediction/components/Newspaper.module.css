@@ -317,7 +317,7 @@
 .careerTitle {
   margin: 0;
 
-  font-size: clamp(48px, 5vw, 75px);
+  font-size: clamp(48px, 5vw, 41px);
   font-weight: 700;
 
   line-height: 0.95;
@@ -358,7 +358,7 @@
 .careerImage {
   float: right;
   width: 60%;
-  margin: 0 0 18px 24px;
+  margin: 0 0 18px 16px !important;
   shape-outside: margin-box; /* giúp chữ bo sát mép ảnh hơn */
 }
 

@@ -7,9 +7,9 @@ import jobPredictionService from "./services/jobPredictionService";
 import "./index.css";
 import Newspaper from "./components/Newspaper";
 
-const randomMath = () => {
-  return 3;
-};
+function randomMarkOneDecimal() {
+  return parseFloat((Math.random() * (4 - 3) + 3).toFixed(1));
+}
 
 const JobPrediction = () => {
   const [file, setFile] = React.useState(null);
@@ -52,9 +52,7 @@ const JobPrediction = () => {
         <div className="hero-content">
           <h1 className="hero-title">Dự đoán nghề nghiệp</h1>
 
-          <div className="hero-subtitle">
-            Đối đầu biểu cảm, bùng nổ thần thái.
-          </div>
+          <div className="hero-subtitle">AI soi tướng, luận ngay sự nghiệp</div>
 
           <div className="hero-decoration" />
         </div>
@@ -119,7 +117,7 @@ const JobPrediction = () => {
         <Newspaper
           data={data}
           fromImage={URL.createObjectURL(file)}
-          mark={randomMath()}
+          mark={randomMarkOneDecimal()}
         />
       )}
     </>

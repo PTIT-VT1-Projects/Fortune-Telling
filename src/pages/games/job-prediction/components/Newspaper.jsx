@@ -9,11 +9,9 @@ const Newspaper = ({ data, mark, fromImage }) => {
         <header className={styles.masthead}>
           <div className={styles.topLine} />
 
-          <h1 className={styles.newspaperTitle}>NEWPOST YORK</h1>
+          <h1 className={styles.newspaperTitle}>VIETNAM POST</h1>
 
-          <div className={styles.dateLine}>
-            YORK, MA — THURSDAY AUGUST 30, 1978 — SEVEN PAGES
-          </div>
+          <div className={styles.dateLine}>Hà Nội, Việt Nam — 2030</div>
         </header>
 
         {/* Main content */}
@@ -86,30 +84,15 @@ const Newspaper = ({ data, mark, fromImage }) => {
               </figure>
 
               <div className={styles.careerText}>
-                <p className={styles.dropCap}>
-                  Chịu trách nhiệm thiết kế, xây dựng và quản lý hạ tầng dữ liệu
-                  quy mô lớn; tối ưu hóa các đường ống dẫn dữ liệu (data
-                  pipelines) giúp doanh nghiệp biến dữ liệu thô thành thông tin
-                  có giá trị cao cho các quyết định chiến lược.
-                </p>
+                <p className={styles.dropCap}>{data.futureJobDescription}</p>
 
                 <div className={styles.responsibilityBlock}>
-                  <h3>KEY RESPONSIBILITIES</h3>
+                  <h3>CÔNG VIỆC CHÍNH</h3>
 
                   <ul>
-                    <li>
-                      Thiết kế và xây dựng hệ thống dữ liệu hiệu quả, có khả
-                      năng mở rộng.
-                    </li>
-
-                    <li>
-                      Đảm bảo chất lượng, tính toàn vẹn và bảo mật của dữ liệu.
-                    </li>
-
-                    <li>
-                      Tối ưu hóa pipeline dữ liệu cho phân tích và machine
-                      learning.
-                    </li>
+                    {data.keyResponsibilities.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>

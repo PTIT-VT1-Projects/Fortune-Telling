@@ -6,8 +6,16 @@ const ai = new GoogleGenAI({
   apiKey: config.api.key,
 });
 
+const jobFields = ["Viễn thông", "Hàng không vũ trụ", "Kỹ thuật dữ liệu"];
+
+function pickRandomField() {
+  const index = Math.floor(Math.random() * jobFields.length);
+  return jobFields[index];
+}
+
 async function createPortraitAfterFiveYears(image, mark) {
   let generatedImage = "";
+  const selectedField = pickRandomField();
   // Bước 1: tạo ảnh
   try {
     const base64Image = await imageService.blobToBase64(image);
@@ -16,7 +24,7 @@ async function createPortraitAfterFiveYears(image, mark) {
       model: "gemini-3.1-flash-image-preview",
       contents: [
         {
-          text: "make this person look 4 years older, only take the face and put in a job in telecommunication or data engineering field \
+          text: "make this person look 4 years older, only take the face and put in a job in telecommunication, Aerospace or data engineering field \
           with name of that field, without true name",
         },
         {
@@ -45,18 +53,18 @@ async function createPortraitAfterFiveYears(image, mark) {
   }
 
   // BƯỚC 2: yêu cầu Gemini trả JSON text đúng schema
-  const textPrompt = `
-      Dựa trên yêu cầu trước đó, hãy chọn 1 nghề phù hợp thuộc:
-      - Viễn thông
-      - Kỹ thuật dữ liệu
 
-      Viết thêm một đoạn chúc mừng khoảng 3-4 dòng cho người đạt điểm ${mark}.
+  const textPrompt = `
+      Hãy chọn 1 nghề nghiệp cụ thể thuộc ngành "${selectedField}" (không được chọn ngành khác) và viết mô tả nghề nghiệp thuộc ngành ${selectedField}
+
+      Viết thêm một đoạn chúc mừng khoảng 3-4 dòng cho người đạt điểm ${mark} và viết trách nhiệm ngắn gọn của nghề nghiệp thuộc ngành ${selectedField}
 
       Chỉ trả về JSON hợp lệ với đúng cấu trúc sau:
       {
         "futureJob": "string",
         "futureJobDescription": "string",
-        "congratulationText": "string"
+        "congratulationText": "string",
+        "keyResponsibilities": ["string", "string", "string"]
       }
       `;
   try {
@@ -64,26 +72,19 @@ async function createPortraitAfterFiveYears(image, mark) {
       model: "gemini-3.6-flash",
       contents: textPrompt,
       config: {
-        responseFormat: {
-          text: {
-            mimeType: "application/json",
-            schema: {
-              type: "object",
-              properties: {
-                futureJob: {
-                  type: "string",
-                },
-                futureJobDescription: {
-                  type: "string",
-                },
-                congratulationText: {
-                  type: "string",
-                },
-              },
-              required: ["futureJob", "congratulationText"],
-              additionalProperties: false,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            futureJob: { type: "string" },
+            futureJobDescription: { type: "string" },
+            congratulationText: { type: "string" },
+            keyResponsibilities: {
+              type: "array",
+              items: { type: "string" },
             },
           },
+          required: ["futureJob", "congratulationText", "keyResponsibilities"],
         },
       },
     });
@@ -95,10 +96,10 @@ async function createPortraitAfterFiveYears(image, mark) {
       futureJob: textResult.futureJob,
       futureJobDescription: textResult.futureJobDescription,
       congratulationText: textResult.congratulationText,
+      keyResponsibilities: textResult.keyResponsibilities,
       generatedImage,
     };
 
-    console.log(result);
     return result;
   } catch (error) {
     console.error("Gemini API Error:", error.message);
