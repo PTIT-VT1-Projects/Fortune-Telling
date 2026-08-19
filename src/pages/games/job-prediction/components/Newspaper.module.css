@@ -1,0 +1,612 @@
+/* Newspaper.module.css */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap");
+
+:global(*) {
+  box-sizing: border-box;
+}
+
+.newspaperContainer {
+  margin: 0;
+  background: #e7e2d9;
+  padding: 30px;
+  color: #151515;
+
+  font-family: "Noto Serif", Georgia, "Times New Roman", serif;
+}
+
+/* =====================================================
+   NEWSPAPER
+===================================================== */
+
+.newspaper {
+  width: min(1500px, 100%);
+  margin: 0 auto;
+
+  padding: 15px 20px 25px;
+
+  color: #151515;
+
+  font-family: "Noto Serif", Georgia, "Times New Roman", serif;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.025), transparent 30%),
+    #f4efe5;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================================================
+   MASTHEAD
+===================================================== */
+
+.masthead {
+  text-align: center;
+}
+
+.topLine {
+  height: 15px;
+
+  border-top: 9px solid #111;
+  border-bottom: 3px solid #111;
+}
+
+.newspaperTitle {
+  margin: 5px 0 0;
+  padding: 0 0 8px;
+
+  font-family: "Times New Roman", serif;
+  font-size: clamp(55px, 8vw, 120px);
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 3px;
+
+  border-bottom: 4px solid #111;
+}
+
+.dateLine {
+  padding: 10px 0 8px;
+
+  border-bottom: 6px double #111;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+/* =====================================================
+   MAIN GRID
+===================================================== */
+
+.mainGrid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  margin-top: 20px;
+}
+
+.leftArticle,
+.careerArticle {
+  padding: 0 20px;
+}
+
+.leftArticle {
+  border-right: 1px solid #555;
+}
+
+.sectionLabel {
+  display: inline-block;
+
+  margin-bottom: 10px;
+  padding-bottom: 3px;
+
+  border-bottom: 1px solid #111;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+/* =====================================================
+   CONGRATULATIONS
+===================================================== */
+
+.mainHeadline {
+  margin: 0;
+
+  font-size: clamp(29px, 4vw, 39px);
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.headlineSubtitle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 10px 0 25px;
+
+  font-size: 21px;
+}
+
+.headlineSubtitle span {
+  flex: 1;
+
+  height: 1px;
+
+  background: #999;
+}
+
+.headlineSubtitle em {
+  white-space: nowrap;
+}
+
+.congratulationGrid {
+  display: grid;
+}
+
+.articleColumn {
+  font-size: 18px;
+
+  line-height: 1.45;
+
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.articleColumn p {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.secondColumn {
+  padding-left: 25px;
+
+  border-left: 1px dotted #777;
+}
+
+/* =====================================================
+   DROP CAP
+===================================================== */
+
+.dropCap::first-letter {
+  float: left;
+
+  margin-right: 7px;
+
+  font-size: 72px;
+  font-weight: 500;
+
+  line-height: 52px;
+}
+
+/* =====================================================
+   SCORE STAMP
+===================================================== */
+
+.scoreArea {
+  margin-top: 35px;
+
+  text-align: center;
+}
+
+.scoreDecoration {
+  display: flex;
+
+  justify-content: center;
+  align-items: flex-end;
+
+  gap: 10px;
+}
+
+.scoreStamp {
+  width: 135px;
+  height: 135px;
+
+  padding: 7px;
+
+  border: 5px double #8b2a20;
+  border-radius: 50%;
+
+  color: #8b2a20;
+
+  transform: rotate(-5deg);
+}
+
+.scoreInner {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  border: 2px dotted #8b2a20;
+  border-radius: 50%;
+
+  font-size: 53px;
+  font-weight: 700;
+}
+
+.leaf {
+  color: #8b2a20;
+
+  font-size: 60px;
+
+  line-height: 1;
+}
+
+.leafLeft {
+  transform: rotate(-20deg);
+}
+
+.leafRight {
+  transform: rotate(200deg);
+}
+
+.scoreLabel {
+  margin-top: 5px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.scoreValue {
+  font-size: 21px;
+}
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quoteBox {
+  position: relative;
+
+  margin: 55px 0 0;
+
+  padding: 25px 30px;
+
+  border: 1px solid #777;
+
+  text-align: center;
+
+  font-size: 19px;
+}
+
+.quoteBox p {
+  margin: 0;
+}
+
+.quoteMark {
+  position: absolute;
+
+  top: -25px;
+  left: -4px;
+
+  padding-right: 8px;
+
+  background: #f4efe5;
+
+  font-size: 65px;
+
+  line-height: 1;
+}
+
+.quoteEnd {
+  top: auto;
+  left: auto;
+
+  right: -4px;
+  bottom: -34px;
+}
+
+/* =====================================================
+   CAREER
+===================================================== */
+
+.careerTitle {
+  margin: 0;
+
+  font-size: clamp(48px, 5vw, 75px);
+  font-weight: 700;
+
+  line-height: 0.95;
+}
+
+.careerSubtitle {
+  margin-top: 10px;
+
+  font-size: 21px;
+
+  font-style: italic;
+}
+
+.byline {
+  display: inline-block;
+
+  margin-top: 25px;
+
+  padding-bottom: 6px;
+
+  border-bottom: 2px solid #222;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.careerContent {
+  margin-top: 22px;
+
+  /* chứa float */
+  display: flow-root;
+}
+
+/* =====================================================
+   CAREER IMAGE (đã gộp, chữ sẽ bo quanh ảnh)
+===================================================== */
+
+.careerImage {
+  float: right;
+  width: 60%;
+  margin: 0 0 18px 24px;
+  shape-outside: margin-box; /* giúp chữ bo sát mép ảnh hơn */
+}
+
+.careerImageBox {
+  width: 100%;
+  overflow: hidden;
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.careerImageBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.careerImage figcaption {
+  padding: 8px;
+  border-right: 1px solid #777;
+  border-bottom: 1px solid #777;
+  border-left: 1px solid #777;
+  text-align: center;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.careerText {
+  font-size: 17px;
+  line-height: 1.5;
+
+  text-align: justify;
+}
+
+.careerText p {
+  margin-top: 0;
+}
+
+/* =====================================================
+   RESPONSIBILITIES
+===================================================== */
+
+.responsibilityBlock {
+  margin-top: 30px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #777;
+}
+
+.responsibilityBlock h3 {
+  margin: 0 0 12px;
+
+  font-size: 14px;
+}
+
+.responsibilityBlock ul {
+  margin: 0;
+
+  padding-left: 18px;
+}
+
+.responsibilityBlock li {
+  margin-bottom: 10px;
+}
+
+/* =====================================================
+   CAREER IMAGE
+===================================================== */
+
+.careerImage {
+  margin: 0;
+}
+
+.careerImage img {
+  display: block;
+
+  width: 100%;
+  height: 470px;
+
+  object-fit: cover;
+
+  border: 1px solid #222;
+
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.careerImage figcaption {
+  padding: 8px;
+
+  border-right: 1px solid #777;
+  border-bottom: 1px solid #777;
+  border-left: 1px solid #777;
+
+  text-align: center;
+
+  font-size: 15px;
+  font-style: italic;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.newspaperFooter {
+  display: grid;
+
+  grid-template-columns:
+    1.2fr
+    1.4fr
+    1.4fr
+    1.4fr
+    1.4fr
+    2.4fr;
+
+  margin-top: 15px;
+
+  padding-top: 18px;
+
+  border-top: 4px double #111;
+}
+
+.footerTitle {
+  padding: 10px;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.footerItem {
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 5px 20px;
+
+  border-left: 1px solid #999;
+
+  font-size: 15px;
+}
+
+.footerItem span:last-child {
+  margin-top: 5px;
+}
+
+.footerQuote {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 12px 25px;
+
+  border: 1px solid #555;
+
+  text-align: center;
+}
+
+.footerQuote em {
+  font-size: 16px;
+}
+
+.footerQuote span {
+  margin-top: 10px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .leftArticle {
+    margin-bottom: 30px;
+
+    padding-bottom: 30px;
+
+    border-right: 0;
+    border-bottom: 2px solid #222;
+  }
+
+  .newspaperFooter {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footerQuote {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+===================================================== */
+
+@media (max-width: 750px) {
+  :global(body) {
+    padding: 10px;
+  }
+
+  .newspaper {
+    padding: 10px;
+  }
+
+  .newspaperTitle {
+    font-size: 48px;
+
+    letter-spacing: 1px;
+  }
+
+  .dateLine {
+    font-size: 11px;
+  }
+
+  .congratulationGrid,
+  .careerContent {
+    grid-template-columns: 1fr;
+  }
+
+  .secondColumn {
+    padding-left: 0;
+
+    border-left: 0;
+  }
+
+  .careerImage img {
+    height: auto;
+  }
+
+  .headlineSubtitle span {
+    display: none;
+  }
+
+  .headlineSubtitle em {
+    white-space: normal;
+  }
+
+  .newspaperFooter {
+    grid-template-columns: 1fr;
+  }
+
+  .footerItem {
+    border-top: 1px solid #aaa;
+    border-left: 0;
+  }
+}
