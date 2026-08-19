@@ -153,7 +153,7 @@ const JobPrediction = () => {
             toImage={portraitImage}
             width={450}
             height={450}
-            duration={3000}
+            duration={5000}
             autoPlay
           />
 
