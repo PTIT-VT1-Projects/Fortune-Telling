@@ -1,6 +1,6 @@
 import styles from "./ImageUploader.module.css";
 
-import { cloneElement, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import AnalysisProgress from "../AnalysisProgress/AnalysisProgress";
 import ImageService from "../../services/imageService";

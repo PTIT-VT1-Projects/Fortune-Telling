@@ -6,6 +6,7 @@ import AgingTransition from "./components/AgingTransition";
 import jobPredictionService from "./services/jobPredictionService";
 import "./index.css";
 import Newspaper from "./components/Newspaper";
+import AnalysisProgress from "../../../components/AnalysisProgress/AnalysisProgress";
 
 function randomMarkOneDecimal() {
   return parseFloat((Math.random() * (4 - 3) + 3).toFixed(1));
@@ -16,13 +17,7 @@ const JobPrediction = () => {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
-  const setOriginalImage = async (selectedFile) => {
-    if (!selectedFile) return;
-
-    setFile(selectedFile);
-  };
-
-  const handleImageSelect = async () => {
+  const handleImageSelect = async (file) => {
     if (!file) {
       console.warn("Chưa chọn ảnh");
       return;
@@ -30,10 +25,10 @@ const JobPrediction = () => {
 
     try {
       setLoading(true);
-
       const result =
         await jobPredictionService.createPortraitAfterFiveYears(file);
       setData(result);
+      setFile(file);
     } catch (error) {
       console.error("Lỗi tạo ảnh:", error);
     } finally {
@@ -61,20 +56,8 @@ const JobPrediction = () => {
       {/* Chưa chọn ảnh */}
       {!file && (
         <ImageUploader
-          onImageSelect={setOriginalImage}
-          render={({ src }) => (
-            <div className="text-center">
-              <img
-                src={src}
-                alt="Preview"
-                style={{
-                  width: 450,
-                  height: 450,
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          )}
+          onImageSelect={handleImageSelect}
+          render={({ src }) => <AnalysisProgress image={src} file={file} />}
         />
       )}
 
