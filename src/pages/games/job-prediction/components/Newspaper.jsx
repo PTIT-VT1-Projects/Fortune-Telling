@@ -102,7 +102,7 @@ const Newspaper = ({ data, mark, fromImage }) => {
 
         {/* Footer */}
         <footer className={styles.newspaperFooter}>
-          <div className={styles.footerTitle}>INSIDE THIS ISSUE</div>
+          <div className={styles.footerTitle}>TRONG SỐ NÀY</div>
 
           <div className={styles.footerItem}>
             <strong>Tech Trends</strong>

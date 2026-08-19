@@ -75,7 +75,7 @@ function Features() {
               <div className="feature-icon-container">
                 <div className="feature-icon overview-icon">
                   <img
-                    src="/images/face-reader.svg"
+                    src="/images/job-prediction.svg"
                     alt="Tổng quan"
                     style={{
                       width: "100%",
@@ -88,8 +88,8 @@ function Features() {
               <div className={styles["feature-text"]}>
                 <h2 className="feature-title">Dự đoán nghề nghiệp</h2>
                 <p>
-                  Chụp ảnh bằng camera để AI đoán tuổi, soi tính cách và chấm
-                  điểm gương mặt. Vui là chính, chính xác là chuyện tính sau.
+                  Chụp ảnh bằng camera để AI đoán tuổi, soi tướng và gợi ý nghề
+                  nghiệp tương lai. Vui là chính, đúng nghề là chuyện hên xui.
                 </p>
               </div>
             </div>
