@@ -18,6 +18,12 @@ import JobPrediction from "./pages/games/job-prediction";
 function App() {
   return (
     <Router>
+      {console.log(
+        "KEY LOADED:",
+        import.meta.env.VITE_GEMINI_API_KEY
+          ? import.meta.env.VITE_GEMINI_API_KEY
+          : "MISSING",
+      )}
       <div className="app" id="app">
         <Header />
         <main className="main-content">
