@@ -14,6 +14,12 @@ function pickRandomField() {
 }
 
 async function createPortraitAfterFiveYears(image, mark) {
+  console.log(
+    "KEY LOADED:",
+    import.meta.env.VITE_GEMINI_API_KEY
+      ? import.meta.env.VITE_GEMINI_API_KEY
+      : "MISSING",
+  );
   let generatedImage = "";
   const selectedField = pickRandomField();
   // Bước 1: tạo ảnh
