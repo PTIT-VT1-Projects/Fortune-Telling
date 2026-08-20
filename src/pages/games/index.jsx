@@ -91,8 +91,8 @@ function Features() {
                   Dự đoán nghề nghiệp
                 </h2>
                 <p>
-                  Chụp ảnh bằng camera để AI đoán tuổi, soi tướng và gợi ý nghề
-                  nghiệp tương lai. Vui là chính, đúng nghề là chuyện hên xui.
+                  Chụp ảnh bằng camera để AI soi tướng và gợi ý nghề nghiệp
+                  tương lai. Vui là chính, đúng nghề là chuyện hên xui.
                 </p>
               </div>
             </div>
