@@ -86,7 +86,10 @@ function Features() {
                 </div>
               </div>
               <div className={styles["feature-text"]}>
-                <h2 className="feature-title">Dự đoán nghề nghiệp</h2>
+                <h2 className="feature-title">
+                  <span className={styles["badge-new"]}>New</span>
+                  Dự đoán nghề nghiệp
+                </h2>
                 <p>
                   Chụp ảnh bằng camera để AI đoán tuổi, soi tướng và gợi ý nghề
                   nghiệp tương lai. Vui là chính, đúng nghề là chuyện hên xui.

@@ -304,6 +304,43 @@
   );
 }
 
+.badge-new {
+  display: inline-block;
+  background: #dc3545;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.1rem 0.2rem;
+  border-radius: 4px;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  margin-top: 1px;
+  position: relative;
+  top: -2px;
+  animation: colorChange 4s linear infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: #ff3b30;
+  }
+  20% {
+    background-color: #ff9500;
+  }
+  40% {
+    background-color: #ffd700;
+  }
+  60% {
+    background-color: #32cd32;
+  }
+  80% {
+    background-color: #1e90ff;
+  }
+  100% {
+    background-color: #ff3b30;
+  }
+}
+
 /* Responsive styles */
 @media (max-width: 760px) {
   .features-grid {
