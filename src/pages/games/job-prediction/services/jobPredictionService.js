@@ -14,7 +14,6 @@ function pickRandomField() {
 }
 
 async function createPortraitAfterFiveYears(image, mark) {
-  console.log(config.api.key);
   let generatedImage = "";
   const selectedField = pickRandomField();
   // Bước 1: tạo ảnh

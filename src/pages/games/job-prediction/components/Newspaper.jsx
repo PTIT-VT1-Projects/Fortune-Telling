@@ -20,9 +20,7 @@ const Newspaper = ({ data, mark, fromImage }) => {
           <section className={styles.leftArticle}>
             <div className={styles.sectionLabel}>TIN TỨC ĐẶC BIỆT</div>
 
-            <h2 className={styles.mainHeadline}>
-              🌟 XUẤT HIỆN NGÔI SAO MỚI NỔI 🌟
-            </h2>
+            <h2 className={styles.mainHeadline}>🌟NGÔI SAO MỚI NỔI 🌟</h2>
             <br />
 
             <div className={styles.congratulationGrid}>
