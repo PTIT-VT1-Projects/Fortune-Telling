@@ -49,13 +49,12 @@ const ImageUploader = ({ onImageSelect, render }) => {
     if (render) {
       return render({
         image: previewUrl,
-        src: previewUrl,
         onRetry: handleRetry,
       });
     }
 
     // Fallback mặc định
-    return <AnalysisProgress src={previewUrl} onRetry={handleRetry} />;
+    return <AnalysisProgress image={previewUrl} onRetry={handleRetry} />;
   }
 
   return (

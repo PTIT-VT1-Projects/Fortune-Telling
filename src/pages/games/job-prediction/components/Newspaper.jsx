@@ -96,25 +96,25 @@ const Newspaper = ({ data, mark, fromImage }) => {
           <div className={styles.footerItem}>
             <strong>Tech Trends</strong>
             <span>Shaping Tomorrow</span>
-            <span>Page 2</span>
+            <span>Trang 2</span>
           </div>
 
           <div className={styles.footerItem}>
             <strong>The Power of</strong>
             <span>Continuous Learning</span>
-            <span>Page 3</span>
+            <span>Trang 3</span>
           </div>
 
           <div className={styles.footerItem}>
             <strong>Careers in Tech:</strong>
             <span>Opportunities Ahead</span>
-            <span>Page 5</span>
+            <span>Trang 5</span>
           </div>
 
           <div className={styles.footerItem}>
             <strong>Interview with</strong>
             <span>Industry Experts</span>
-            <span>Page 7</span>
+            <span>Trang 7</span>
           </div>
 
           <div className={styles.footerQuote}>

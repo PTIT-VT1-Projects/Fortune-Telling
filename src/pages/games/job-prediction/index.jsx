@@ -60,7 +60,9 @@ const JobPrediction = () => {
       {!file && (
         <ImageUploader
           onImageSelect={handleImageSelect}
-          render={({ src }) => <AnalysisProgress image={src} file={file} />}
+          render={({ image, onRetry }) => (
+            <AnalysisProgress image={image} file={file} onRetry={onRetry} />
+          )}
         />
       )}
 
