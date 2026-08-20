@@ -56,15 +56,22 @@ async function createPortraitAfterFiveYears(image, mark) {
 
   const textPrompt = `
       Hãy chọn 1 nghề nghiệp cụ thể thuộc ngành "${selectedField}" (không được chọn ngành khác) và viết mô tả nghề nghiệp thuộc ngành ${selectedField}
-
-      Viết thêm một đoạn chúc mừng khoảng 3-4 dòng theo hướng hài hước cho người đạt điểm ${mark} và viết trách nhiệm ngắn gọn của nghề nghiệp thuộc ngành ${selectedField}
-
+      Viết thêm một đoạn chúc mừng khoảng 3-4 dòng theo hướng hài hước cho người đạt điểm ${mark} và viết trách nhiệm ngắn gọn của nghề nghiệp thuộc ngành ${selectedField}.
+      Đồng thời viết một mục "TRONG SỐ NÀY" gồm 4 bản tin tóm tắt, trình bày theo dạng mục lục báo, mỗi bản tin gồm:
+      - Tiêu đề ngắn, in đậm (2-3 từ, dạng chủ đề/section như "Báo cáo 6G", "Internet vệ tinh")
+      - Một dòng mô tả gợi mở bên dưới (4-6 từ, mang tính giật tít nhẹ, không viết tắt cộc lốc mà gợi cảm giác tò mò)
       Chỉ trả về JSON hợp lệ với đúng cấu trúc sau:
       {
         "futureJob": "string",
         "futureJobDescription": "string",
         "congratulationText": "string",
-        "keyResponsibilities": ["string", "string", "string"]
+        "keyResponsibilities": ["string", "string", "string"],
+        "furtherReadings": [
+          { "title": "string", "content": "string" },
+          { "title": "string", "content": "string" },
+          { "title": "string", "content": "string" },
+          { "title": "string", "content": "string" }
+        ]
       }
       `;
   try {
@@ -83,8 +90,25 @@ async function createPortraitAfterFiveYears(image, mark) {
               type: "array",
               items: { type: "string" },
             },
+            furtherReadings: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  title: { type: "string" },
+                  content: { type: "string" },
+                },
+                required: ["title", "content"],
+                additionalProperties: false,
+              },
+            },
           },
-          required: ["futureJob", "congratulationText", "keyResponsibilities"],
+          required: [
+            "futureJob",
+            "congratulationText",
+            "keyResponsibilities",
+            "furtherReadings",
+          ],
         },
       },
     });
@@ -97,9 +121,9 @@ async function createPortraitAfterFiveYears(image, mark) {
       futureJobDescription: textResult.futureJobDescription,
       congratulationText: textResult.congratulationText,
       keyResponsibilities: textResult.keyResponsibilities,
+      furtherReadings: textResult.furtherReadings,
       generatedImage,
     };
-
     return result;
   } catch (error) {
     console.error("Gemini API Error:", error.message);

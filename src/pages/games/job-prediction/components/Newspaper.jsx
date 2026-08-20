@@ -20,7 +20,9 @@ const Newspaper = ({ data, mark, fromImage }) => {
           <section className={styles.leftArticle}>
             <div className={styles.sectionLabel}>TIN TỨC ĐẶC BIỆT</div>
 
-            <h2 className={styles.mainHeadline}>CONGRATULATIONS</h2>
+            <h2 className={styles.mainHeadline}>
+              🌟 XUẤT HIỆN NGÔI SAO MỚI NỔI 🌟
+            </h2>
             <br />
 
             <div className={styles.congratulationGrid}>
@@ -93,29 +95,15 @@ const Newspaper = ({ data, mark, fromImage }) => {
         <footer className={styles.newspaperFooter}>
           <div className={styles.footerTitle}>TRONG SỐ NÀY</div>
 
-          <div className={styles.footerItem}>
-            <strong>Tech Trends</strong>
-            <span>Shaping Tomorrow</span>
-            <span>Trang 2</span>
-          </div>
-
-          <div className={styles.footerItem}>
-            <strong>The Power of</strong>
-            <span>Continuous Learning</span>
-            <span>Trang 3</span>
-          </div>
-
-          <div className={styles.footerItem}>
-            <strong>Careers in Tech:</strong>
-            <span>Opportunities Ahead</span>
-            <span>Trang 5</span>
-          </div>
-
-          <div className={styles.footerItem}>
-            <strong>Interview with</strong>
-            <span>Industry Experts</span>
-            <span>Trang 7</span>
-          </div>
+          {data.furtherReadings.map((item, index) => {
+            return (
+              <div key={index} className={styles.footerItem}>
+                <strong>{item.title}</strong>
+                <span>{item.content}</span>
+                <span>Trang 2</span>
+              </div>
+            );
+          })}
 
           <div className={styles.footerQuote}>
             <em>
