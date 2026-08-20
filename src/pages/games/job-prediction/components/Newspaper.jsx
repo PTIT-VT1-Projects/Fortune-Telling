@@ -21,14 +21,7 @@ const Newspaper = ({ data, mark, fromImage }) => {
             <div className={styles.sectionLabel}>TIN TỨC ĐẶC BIỆT</div>
 
             <h2 className={styles.mainHeadline}>CONGRATULATIONS</h2>
-
-            <div className={styles.headlineSubtitle}>
-              <span />
-
-              <em>Một cột mốc đáng tự hào đã được chinh phục</em>
-
-              <span />
-            </div>
+            <br />
 
             <div className={styles.congratulationGrid}>
               {/* Left text */}
@@ -64,11 +57,7 @@ const Newspaper = ({ data, mark, fromImage }) => {
 
             <h2 className={styles.careerTitle}>{data.futureJob}</h2>
 
-            <div className={styles.careerSubtitle}>
-              Building the infrastructure behind modern intelligent systems
-            </div>
-
-            <div className={styles.byline}>BỞI KHOA VIỄN THÔNG 1</div>
+            <div className={styles.byline}>KHOA VIỄN THÔNG 1</div>
 
             <div className={styles.careerContent}>
               <figure className={styles.careerImage}>

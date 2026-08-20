@@ -57,7 +57,7 @@ async function createPortraitAfterFiveYears(image, mark) {
   const textPrompt = `
       Hãy chọn 1 nghề nghiệp cụ thể thuộc ngành "${selectedField}" (không được chọn ngành khác) và viết mô tả nghề nghiệp thuộc ngành ${selectedField}
 
-      Viết thêm một đoạn chúc mừng khoảng 3-4 dòng cho người đạt điểm ${mark} và viết trách nhiệm ngắn gọn của nghề nghiệp thuộc ngành ${selectedField}
+      Viết thêm một đoạn chúc mừng khoảng 3-4 dòng theo hướng hài hước cho người đạt điểm ${mark} và viết trách nhiệm ngắn gọn của nghề nghiệp thuộc ngành ${selectedField}
 
       Chỉ trả về JSON hợp lệ với đúng cấu trúc sau:
       {

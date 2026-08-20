@@ -16,6 +16,7 @@ const JobPrediction = () => {
   const [file, setFile] = React.useState(null);
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const randomMark = React.useState(randomMarkOneDecimal());
 
   const handleImageSelect = async (file) => {
     if (!file) {
@@ -25,8 +26,10 @@ const JobPrediction = () => {
 
     try {
       setLoading(true);
-      const result =
-        await jobPredictionService.createPortraitAfterFiveYears(file);
+      const result = await jobPredictionService.createPortraitAfterFiveYears(
+        file,
+        randomMark,
+      );
       setData(result);
       setFile(file);
     } catch (error) {
@@ -100,7 +103,7 @@ const JobPrediction = () => {
         <Newspaper
           data={data}
           fromImage={URL.createObjectURL(file)}
-          mark={randomMarkOneDecimal()}
+          mark={randomMark}
         />
       )}
     </>
